@@ -8,12 +8,13 @@ from typing import Tuple
 
 from .individual import Individual
 
+
 class Subpopulation():
     def __init__(self, id: int, coordinates: Tuple[int, int], migration_mapping: np.ndarray = None):
         self.id = id
         self.coordinates = coordinates
         self.migration_mapping = migration_mapping
-        self.individuals = IndividualsInPopulation(self)
+        self.population = IndividualsInPopulation(self)
         
 
 class IndividualsInPopulation(MutableSet):
