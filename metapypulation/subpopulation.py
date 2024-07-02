@@ -27,7 +27,7 @@ class Subpopulation():
         return len(self.outgoing_migrants)
     
         
-    def list_migrants(self, migration_rate: float) -> List[Individual]:
+    def list_migrants(self, migration_rate: float) -> None:
         """This function creates a list of migrants that will be sent out of the subpopulation.
 
         Args:
@@ -39,12 +39,11 @@ class Subpopulation():
         # self.population.shuffle()
         size = self.get_population_size()
         number_of_migrants = np.random.binomial(size, migration_rate)
-        indeces_to_migrate = random.sample(range(size), number_of_migrants)
-        
-        for individual in self.population.sample_and_remove(indeces_to_migrate):
-            print("here")
-            self.outgoing_migrants.add(individual)
-            #self.population.discard(individual)
+        # indeces_to_migrate = random.sample(range(size), number_of_migrants)
+        if number_of_migrants > 0:
+            individuals_to_remove = self.population.sample_and_remove(number_of_migrants)
+            for individual in individuals_to_remove:
+                self.outgoing_migrants.add(individual)
             
                 
     def incorporate_migrants_in_population(self, incoming_migrants: "SetOfIndividuals") -> None:
@@ -54,12 +53,26 @@ class Subpopulation():
         incoming_migrants.empty_set()
         
       
-        
+class IndividualsIterator(object):
+    def __init__(self, individuals):
+        self.idx = 0
+        self.data = individuals
+    def __iter__(self):
+        return self
+    def __next__(self):
+        self.idx += 1
+        try:
+            return self.data[self.idx-1]
+        except IndexError:
+            self.idx = 0
+            raise StopIteration
+
 
 class SetOfIndividuals(MutableSet):
     def __init__(self, deme: Subpopulation):
         self.individuals = []
         self.deme = deme.id
+        self.index = len(self.individuals)
         
     def __contains__(self, individual: Individual) -> bool:
         """Checks if an agent is in the SetOfIndividuals.
@@ -78,7 +91,13 @@ class SetOfIndividuals(MutableSet):
         Returns:
             Interator[Individual]: iterator for the set.
         """
-        return self.individuals.keys()
+        return IndividualsIterator(self.individuals)#.individuals.keys()
+    
+    # def __next__(self):
+    #     if len(self.individuals) == 0:
+    #         raise StopIteration
+        
+    #     return self.individuals[0]
     
     def __len__(self) -> int:
         """Returns the length of the SetOfIndividuals.
@@ -114,21 +133,24 @@ class SetOfIndividuals(MutableSet):
         Args:
             individual (Individual): individual to be discarded.
         """
-        del self.individuals[individual.id]
+        del self.individuals[individual]
         
     def empty_set(self) -> None:
-        for individual in self:
-            self.discard(individual)
+        self.individuals = []
+        # for individual in self.individuals:
+        #     self.discard(individual)
 
     def shuffle(self) -> None:
-        random.shuffle(self)
+        random.shuffle(self.individuals)
         
-    def sample_and_remove(self, list_of_index: List[int]) -> List[Individual]:
+    def sample_and_remove(self, number_of_individuals) -> List[Individual]:
+        self.shuffle()
+        
         list_of_individuals = []
-        for index in list_of_index:
-            individual = self.individuals[index]
+        for i in range(number_of_individuals):
+            individual = self.individuals.pop()
             list_of_individuals.append(individual)
-            self.discard(individual)
+            # self.discard(individual)
             
         return list_of_individuals
         
