@@ -2,9 +2,10 @@
 A module containing the subpopulation class.
 """
 
-from collections.abc import MutableSet
+from collections.abc import Iterator, MutableSet
 import numpy as np
-from typing import Tuple
+import random
+from typing import List, Tuple
 
 from .individual import Individual
 
@@ -14,25 +15,121 @@ class Subpopulation():
         self.id = id
         self.coordinates = coordinates
         self.migration_mapping = migration_mapping
-        self.population = IndividualsInPopulation(self)
+        self.population = SetOfIndividuals(self)
+        self.outgoing_migrants = SetOfIndividuals(self)
+        
+        
+    def get_population_size(self):
+        return len(self.population)
+    
+    
+    def get_current_number_of_migrants(self):
+        return len(self.outgoing_migrants)
+    
+        
+    def list_migrants(self, migration_rate: float) -> List[Individual]:
+        """This function creates a list of migrants that will be sent out of the subpopulation.
+
+        Args:
+            migration_rate (float): the migration rate is defined as the expected percentage of population that will migrate at each generation.
+
+        Returns:
+            List[Individual]: a simple list of individuals from the subpopulation.
+        """
+        # self.population.shuffle()
+        size = self.get_population_size()
+        number_of_migrants = np.random.binomial(size, migration_rate)
+        indeces_to_migrate = random.sample(range(size), number_of_migrants)
+        
+        for individual in self.population.sample_and_remove(indeces_to_migrate):
+            print("here")
+            self.outgoing_migrants.add(individual)
+            #self.population.discard(individual)
+            
+                
+    def incorporate_migrants_in_population(self, incoming_migrants: "SetOfIndividuals") -> None:
+        for individual in incoming_migrants:
+            self.population.add(individual)
+        
+        incoming_migrants.empty_set()
+        
+      
         
 
-class IndividualsInPopulation(MutableSet):
+class SetOfIndividuals(MutableSet):
     def __init__(self, deme: Subpopulation):
         self.individuals = []
         self.deme = deme.id
         
-    def __contains__(self, individual: Individual):
+    def __contains__(self, individual: Individual) -> bool:
+        """Checks if an agent is in the SetOfIndividuals.
+
+        Args:
+            individual (Individual): an Individual in the set.
+
+        Returns:
+            bool: whether the individual exists in the set.
+        """
         return individual in self.individuals
     
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Individual]:
+        """Provides an iterator for the SetOfIndividuals.
+
+        Returns:
+            Interator[Individual]: iterator for the set.
+        """
         return self.individuals.keys()
     
-    def __len__(self):
+    def __len__(self) -> int:
+        """Returns the length of the SetOfIndividuals.
+
+        Returns:
+            int: _description_
+        """
         return len(self.individuals)
     
+    def __getitem__(self, item: int | slice) -> Individual:
+        """
+        Retrieve an agent or a slice of agents from the SetOfIndividuals. Took from mesa.agent.
+
+        Args:
+            item (int | slice): The index or slice for selecting agents.
+
+        Returns:
+            Agent | list[Agent]: The selected agent or list of agents based on the index or slice provided.
+        """
+        return list(self.individuals)[item]
+    
     def add(self, individual: Individual):
+        """Adds an Individual to the SetOfIndividuals.
+
+        Args:
+            individual (Individual): individual to add to the set.
+        """
         self.individuals.append(individual)
         
     def discard(self, individual: Individual):
-        del self.individuals[individual]
+        """Eliminates an individual from the set (and from the population). 
+
+        Args:
+            individual (Individual): individual to be discarded.
+        """
+        del self.individuals[individual.id]
+        
+    def empty_set(self) -> None:
+        for individual in self:
+            self.discard(individual)
+
+    def shuffle(self) -> None:
+        random.shuffle(self)
+        
+    def sample_and_remove(self, list_of_index: List[int]) -> List[Individual]:
+        list_of_individuals = []
+        for index in list_of_index:
+            individual = self.individuals[index]
+            list_of_individuals.append(individual)
+            self.discard(individual)
+            
+        return list_of_individuals
+        
+        
