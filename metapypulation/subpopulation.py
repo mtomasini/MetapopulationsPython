@@ -11,9 +11,8 @@ from .individual import Individual
 
 
 class Subpopulation():
-    def __init__(self, id: int, coordinates: Tuple[int, int], migration_mapping: np.ndarray = None):
+    def __init__(self, id: int, migration_mapping: np.ndarray = None):
         self.id = id
-        self.coordinates = coordinates
         self.migration_mapping = migration_mapping
         self.population = SetOfIndividuals(self)
         self.outgoing_migrants = SetOfIndividuals(self)
