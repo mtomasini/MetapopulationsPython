@@ -3,6 +3,7 @@ A module containing the class Metapopulation, which determines the topology of t
 """
 
 from collections.abc import Set, Iterator
+from itertools import permutations
 import pandas as pd
 
 from .subpopulation import Subpopulation
@@ -11,7 +12,13 @@ class Metapopulation():
     def __init__(self, number_of_subpopulations: int, migration_matrix: pd.DataFrame = None):
         self.number_of_subpopulations = number_of_subpopulations
         self.subpopulations = SetOfSubpopulations(number_of_subpopulations)
+        self.migration_matrix = migration_matrix
         
+    def migrate(self):
+        
+
+        for (x, y) in permutations(range(1, self.number_of_subpopulations + 1), 2):
+            print(x, y)
         
         
 class SubpopulationIterator(object):
