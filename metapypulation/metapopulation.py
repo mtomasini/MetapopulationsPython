@@ -4,21 +4,59 @@ A module containing the class Metapopulation, which determines the topology of t
 
 from collections.abc import Set, Iterator
 from itertools import permutations
+import numpy as np
 import pandas as pd
+from typing import List
 
+from .individual import Individual
 from .subpopulation import Subpopulation
 
 class Metapopulation():
-    def __init__(self, number_of_subpopulations: int, migration_matrix: pd.DataFrame = None):
+    def __init__(self, number_of_subpopulations: int, 
+                 migration_matrix: np.ndarray = None, 
+                 carrying_capacities: List[int] | int = 100,
+                 number_of_features: int = 5,
+                 number_of_traits: int = 10 
+                 ):
         self.number_of_subpopulations = number_of_subpopulations
         self.subpopulations = SetOfSubpopulations(number_of_subpopulations)
         self.migration_matrix = migration_matrix
+        self.carrying_capacities = carrying_capacities
+        self.number_of_features = number_of_features
+        self.number_of_traits = number_of_traits
+        
+        
+    def populate(self):
+        match self.carrying_capacities:
+            case list():
+                assert self.number_of_subpopulations == len(self.carrying_capacities)
+                for subpopulation in self.subpopulations:
+                    for i in range(self.carrying_capacities[subpopulation.id]):
+                        new_individual = Individual(i, subpopulation.id, self.number_of_features, self.number_of_traits)
+                        subpopulation.add_individual(new_individual)
+            case int():
+                for subpopulation in self.subpopulations:
+                    for i in range(self.carrying_capacities):
+                        new_individual = Individual(i, subpopulation.id, self.number_of_features, self.number_of_traits)
+                        subpopulation.add_individual(new_individual)
+                
         
     def migrate(self):
+        # for each subpopulation we create a list of individuals that will migrate, based on the migration rates matrix
+        for subpopulation in self.subpopulations:
+            # find id of populations to which migration happens:
+            migrate_to = np.nonzero(self.migration_matrix[subpopulation.id])[0]
+            
+            # for each non zero migration rate, find the receiving population and populate its incoming_migrants list
+            for index in migrate_to:
+                migration_rate = self.migration_matrix[subpopulation.id][index]
+                receiving_subpopulation = self.subpopulations[index]
+                receiving_subpopulation.receive_migrants(subpopulation, migration_rate)
         
-
-        for (x, y) in permutations(range(1, self.number_of_subpopulations + 1), 2):
-            print(x, y)
+        for subpopulation in self.subpopulations:
+            subpopulation.incorporate_migrants_in_population() 
+            
+            
         
         
 class SubpopulationIterator(object):

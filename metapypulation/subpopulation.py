@@ -15,6 +15,7 @@ class Subpopulation():
         self.id = id
         self.population = SetOfIndividuals(self)
         self.outgoing_migrants = SetOfIndividuals(self)
+        self.incoming_migrants = SetOfIndividuals(self)
         
         
     def get_population_size(self):
@@ -41,14 +42,34 @@ class Subpopulation():
         if number_of_migrants > 0:
             individuals_to_remove = self.population.sample_and_remove(number_of_migrants)
             for individual in individuals_to_remove:
-                self.outgoing_migrants.add(individual)
+                self.outgoing_migrants.add(individual)   
+                
+    def receive_migrants(self, giving_subpopulation: "Subpopulation", migration_rate: float) -> None:
+        """This function populates the list of incoming migrants that come from a giving population.
+
+        Args:
+            migration_rate (float): the migration rate is defined as the expected percentage of population that will migrate at each generation.
+
+        Returns:
+            List[Individual]: a simple list of individuals from the subpopulation.
+        """
+        population_size = giving_subpopulation.get_population_size()
+        number_of_migrants = np.random.binomial(population_size, migration_rate)
+        if number_of_migrants > 0:
+            individuals_to_remove = giving_subpopulation.population.sample_and_remove(number_of_migrants)
+            for individual in individuals_to_remove:
+                self.incoming_migrants.add(individual)
             
                 
-    def incorporate_migrants_in_population(self, incoming_migrants: "SetOfIndividuals") -> None:
-        for individual in incoming_migrants:
+    def incorporate_migrants_in_population(self) -> None:
+        for individual in self.incoming_migrants:
             self.population.add(individual)
         
-        incoming_migrants.empty_set()
+        self.incoming_migrants.empty_set()
+        
+        
+    def add_individual(self, individual: "Individual") -> None:
+        self.population.add(individual)
         
       
 class IndividualsIterator(object):
