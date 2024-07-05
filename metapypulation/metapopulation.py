@@ -13,13 +13,15 @@ from .subpopulation import Subpopulation
 
 class Metapopulation():
     def __init__(self, number_of_subpopulations: int, 
+                 type_of_interaction: str,
                  migration_matrix: np.ndarray = None, 
                  carrying_capacities: List[int] | int = 100,
                  number_of_features: int = 5,
                  number_of_traits: int = 10 
                  ):
         self.number_of_subpopulations = number_of_subpopulations
-        self.subpopulations = SetOfSubpopulations(number_of_subpopulations)
+        self.subpopulations = SetOfSubpopulations(number_of_subpopulations, type_of_interaction)
+        self.type_of_interaction = type_of_interaction
         self.migration_matrix = migration_matrix
         self.carrying_capacities = carrying_capacities
         self.number_of_features = number_of_features
@@ -51,10 +53,16 @@ class Metapopulation():
             for index in migrate_to:
                 migration_rate = self.migration_matrix[subpopulation.id][index]
                 receiving_subpopulation = self.subpopulations[index]
+            
                 receiving_subpopulation.receive_migrants(subpopulation, migration_rate)
         
         for subpopulation in self.subpopulations:
             subpopulation.incorporate_migrants_in_population() 
+            
+    
+    def make_interact(self):
+        for subpopulation in self.subpopulations:
+            subpopulation.create_interaction()
             
             
         
@@ -75,10 +83,10 @@ class SubpopulationIterator(object):
 
 
 class SetOfSubpopulations(Set):
-    def __init__(self, number_of_subpopulations: int):
+    def __init__(self, number_of_subpopulations: int, type_of_interaction: str):
         self.subpopulations = []
         for subpopulation in range(number_of_subpopulations):
-            self.subpopulations.append(Subpopulation(id = subpopulation))
+            self.subpopulations.append(Subpopulation(id = subpopulation, type_of_interaction = type_of_interaction))
         
     def __contains__(self, subpopulation: Subpopulation) -> bool:
         """Checks if an agent is in the SetOfIndividuals.

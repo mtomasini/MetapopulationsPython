@@ -11,11 +11,12 @@ from .individual import Individual
 
 
 class Subpopulation():
-    def __init__(self, id: int):
+    def __init__(self, id: int, type_of_interaction: str):
         self.id = id
         self.population = SetOfIndividuals(self)
-        self.outgoing_migrants = SetOfIndividuals(self)
+        self.outgoing_migrants = SetOfIndividuals(self) # CONSIDER removing since migration works with incoming_migrants
         self.incoming_migrants = SetOfIndividuals(self)
+        self.type_of_interaction = type_of_interaction
         
         
     def get_population_size(self):
@@ -23,7 +24,7 @@ class Subpopulation():
     
     
     def get_current_number_of_migrants(self):
-        return len(self.outgoing_migrants)
+        return len(self.incoming_migrants)
     
         
     def list_migrants(self, migration_rate: float) -> None:
@@ -35,7 +36,7 @@ class Subpopulation():
         Returns:
             List[Individual]: a simple list of individuals from the subpopulation.
         """
-        # self.population.shuffle()
+        # CONSIDER removing this
         size = self.get_population_size()
         number_of_migrants = np.random.binomial(size, migration_rate)
         # indeces_to_migrate = random.sample(range(size), number_of_migrants)
@@ -70,6 +71,13 @@ class Subpopulation():
         
     def add_individual(self, individual: "Individual") -> None:
         self.population.add(individual)
+        
+
+    def create_interaction(self) -> None:
+        index_focus, index_interacting = np.random.choice(range(self.get_population_size()), 2)
+        focus_individual = self.population.individuals[index_focus]
+        interacting_individual = self.population.individuals[index_interacting]
+        focus_individual.interact(interacting_individual, self.type_of_interaction)
         
       
 class IndividualsIterator(object):
