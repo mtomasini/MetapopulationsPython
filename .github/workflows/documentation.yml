@@ -16,7 +16,7 @@ jobs:
           pip install sphinx myst_parser
       - name: Sphinx build
         run: |
-          sphinx-apidoc -o ./docs/source ./docs/metapypulation
+          sphinx-apidoc -o ./docs/source ./metapypulation
           sphinx-build ./docs/source build/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
