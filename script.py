@@ -6,11 +6,11 @@ from metapypulation.subpopulation import Subpopulation
 from metapypulation.individual import Individual
 from metapypulation.metapopulation import Metapopulation
 
-migrations = np.genfromtxt('./configs/island_model.csv', delimiter=',')
+migrations = np.genfromtxt('./configs/stepping_stone_10pop.csv', delimiter=',')
 
 migrations = migrations
 
-metapop = Metapopulation(4, "axelrod_interaction", migrations)
+metapop = Metapopulation(10, "axelrod_interaction", migrations, carrying_capacities=100)
 metapop.populate()
 
 start_time = time.time()
