@@ -12,7 +12,8 @@ def test_axelrod_interaction():
     individual_2.features = np.array([0, 0, 0, 0, 0])
     
     random.seed(100)
-    individual_1.axelrod_interaction(individual_2)
+    for i in range(10):
+        individual_1.axelrod_interaction(individual_2)
     
     assert np.allclose(individual_1.features, individual_2.features)
     assert individual_1.number_of_changes == 1
