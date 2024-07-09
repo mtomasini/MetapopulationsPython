@@ -1,5 +1,6 @@
 """
-A module containing the class Metapopulation, which determines the topology of the metapopulation as well as the migration rates between populations.
+A module containing the class Metapopulation, which determines the topology of the metapopulation 
+as well as the migration rates between populations.
 """
 
 from collections.abc import Set, Iterator
