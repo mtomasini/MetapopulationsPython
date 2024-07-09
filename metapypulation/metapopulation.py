@@ -20,6 +20,16 @@ class Metapopulation():
                  number_of_features: int = 5,
                  number_of_traits: int = 10 
                  ):
+        """Function that initializes the Metapopulation class.
+
+        Args:
+            number_of_subpopulations (int): the total number of subpopulations to create. 
+            type_of_interaction (str): a string that determines which interaction function to call on. Possibilities are "axelrod_interaction".
+            migration_matrix (np.ndarray, optional): A matrix determining migration rates between subpopulations. Defaults to None.
+            carrying_capacities (List[int] | int, optional): either a list of carrying capacities (of which the `len()` is the same as `number_of_subpopulations`) or single integer determining the same carrying capacity for all subpopulations. Defaults to 100.
+            number_of_features (int, optional): total number of cultural features per individual. Defaults to 5.
+            number_of_traits (int, optional): number of different possible traits for each cultural feature. Defaults to 10.
+        """
         self.number_of_subpopulations = number_of_subpopulations
         self.subpopulations = SetOfSubpopulations(number_of_subpopulations, type_of_interaction)
         self.type_of_interaction = type_of_interaction
@@ -30,6 +40,11 @@ class Metapopulation():
         
         
     def populate(self):
+        """Function that populates the subpopulations within the Metapopulation class. 
+        
+        The populate step can take either a list of carrying capacities, a different number per each subpopulation,
+        or one single carrying capacity that will determine the same number of individuals for each subpopulation.
+        """
         match self.carrying_capacities:
             case list():
                 assert self.number_of_subpopulations == len(self.carrying_capacities)
@@ -45,6 +60,14 @@ class Metapopulation():
                 
         
     def migrate(self):
+        """A function that causes the migration step for a subpopulation. 
+        When called, each subpopulation finds to what subpopulations it needs to send individuals (based on
+        the migration matrix supplied), and it calls upon the `subpopulation.receive_migrants()` function of 
+        the destinations.
+        
+        After each subpopulation has received the migrants, the function `subpopulation.incorporate_migrants_in_population()`
+        is called for each subpopulation. This merges the incoming migrants with the already existing population.
+        """
         # for each subpopulation we create a list of individuals that will migrate, based on the migration rates matrix
         for subpopulation in self.subpopulations:
             # find id of populations to which migration happens:
@@ -62,6 +85,8 @@ class Metapopulation():
             
     
     def make_interact(self):
+        """Function that starts interactions within each subpopulation.
+        """
         for subpopulation in self.subpopulations:
             subpopulation.create_interaction()
             
