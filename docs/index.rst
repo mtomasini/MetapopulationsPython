@@ -6,16 +6,31 @@
 Welcome to MetaPypulation's documentation!
 ==========================================
 
+Contents
+--------
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
    
    overview.md
    api.md
 
+The project
+-----------
+
+   This section is currently empty. 
+
+
+The author
+~~~~~~~~~~
+
+.. toctree::
+   :maxdepth: 1
+   
+   author.md
 
 Indices and tables
-==================
+~~~~~~~~~~~~~~~~~~
 
 * :ref:`genindex`
 * :ref:`modindex`
