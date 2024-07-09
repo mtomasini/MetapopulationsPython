@@ -120,12 +120,6 @@ class SetOfIndividuals(MutableSet):
         """
         return IndividualsIterator(self.individuals)#.individuals.keys()
     
-    # def __next__(self):
-    #     if len(self.individuals) == 0:
-    #         raise StopIteration
-        
-    #     return self.individuals[0]
-    
     def __len__(self) -> int:
         """Returns the length of the SetOfIndividuals.
 
