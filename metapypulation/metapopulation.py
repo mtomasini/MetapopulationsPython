@@ -13,6 +13,18 @@ from .individual import Individual
 from .subpopulation import Subpopulation, SetOfIndividuals
 
 class Metapopulation():
+    """
+    The base class for a metapopulation containing subpopulations.
+    
+    Attributes:
+        number_of_subpopulations (int): how many subpopulations compose the metapopulation.
+        subpopulations (SetOfSubpopulations): the list of Subpopulation objects in the metapopulation.
+        type_of_interaction (str): The type of interaction to implement between individuals for cultural changes. Currently accepts only "axelrod_interaction".
+        migration_matrix (np.ndarray): A matrix determining migration rates between subpopulations.
+        carrying_capacities (List[int] | int): A list of carrying capacities (one for each subpopulation) or an integer (same carrying capacity for each subpopulation).
+        number_of_features (int): Total number of cultural features per individual.
+        number_of_traits (int, optional): Number of different possible traits for each cultural feature.
+    """
     def __init__(self, number_of_subpopulations: int, 
                  type_of_interaction: str,
                  migration_matrix: np.ndarray = None, 
@@ -20,15 +32,15 @@ class Metapopulation():
                  number_of_features: int = 5,
                  number_of_traits: int = 10 
                  ):
-        """Function that initializes the Metapopulation class.
+        """Creates an empty metapopulation.
 
         Args:
-            number_of_subpopulations (int): the total number of subpopulations to create. 
-            type_of_interaction (str): a string that determines which interaction function to call on. Possibilities are "axelrod_interaction".
+            number_of_subpopulations (int): The total number of subpopulations to create. 
+            type_of_interaction (str): A string that determines which interaction function to call on. Possibilities are "axelrod_interaction".
             migration_matrix (np.ndarray, optional): A matrix determining migration rates between subpopulations. Defaults to None.
-            carrying_capacities (List[int] | int, optional): either a list of carrying capacities (of which the `len()` is the same as `number_of_subpopulations`) or single integer determining the same carrying capacity for all subpopulations. Defaults to 100.
-            number_of_features (int, optional): total number of cultural features per individual. Defaults to 5.
-            number_of_traits (int, optional): number of different possible traits for each cultural feature. Defaults to 10.
+            carrying_capacities (List[int] | int, optional): Either a list of carrying capacities (of which the `len()` is the same as `number_of_subpopulations`) or single integer determining the same carrying capacity for all subpopulations. Defaults to 100.
+            number_of_features (int, optional): Total number of cultural features per individual. Defaults to 5.
+            number_of_traits (int, optional): Number of different possible traits for each cultural feature. Defaults to 10.
         """
         self.number_of_subpopulations = number_of_subpopulations
         self.subpopulations = SetOfSubpopulations(number_of_subpopulations, type_of_interaction)
@@ -39,8 +51,8 @@ class Metapopulation():
         self.number_of_traits = number_of_traits
         
         
-    def populate(self):
-        """Function that populates the subpopulations within the Metapopulation class. 
+    def populate(self) -> None:
+        """Populate all (empty) subpopulations within the Metapopulation class. 
         
         The populate step can take either a list of carrying capacities, a different number per each subpopulation,
         or one single carrying capacity that will determine the same number of individuals for each subpopulation.
@@ -59,7 +71,7 @@ class Metapopulation():
                         subpopulation.add_individual(new_individual)
                 
         
-    def migrate(self):
+    def migrate(self) -> None:
         """A function that causes the migration step for a subpopulation. 
         When called, each subpopulation finds to what subpopulations it needs to send individuals (based on
         the migration matrix supplied), and it calls upon the `subpopulation.receive_migrants()` function of 
@@ -85,20 +97,35 @@ class Metapopulation():
             
             
     def get_metapopulation_size(self) -> int:
+        """
+        Calculates the full size of the metapopulation. In the absence of population reduction strategies, this is always
+        equal to the sum of all the carrying capacities.
+
+        Returns:
+            int: the number of individuals in the whole metapopulation.
+        """
         population_size = 0
         for subpopulation in self.subpopulations:
             population_size += subpopulation.get_population_size()
     
         return population_size
     
-    def make_interact(self):
-        """Function that starts interactions within each subpopulation.
+    
+    def make_interact(self) -> None:
+        """
+        Make one interaction in each subpopulation.
         """
         for subpopulation in self.subpopulations:
             subpopulation.create_interaction()
             
         
     def shannon_diversity_per_subpopulation(self) -> List[float]:
+        """
+        Calculates Shannon diversity index in each subpopulation.
+
+        Returns:
+            List[float]: list with the Shannon diversity index per subpopulation.
+        """
         subpopulation_shannons = []
         for subpopulation in self.subpopulations:
             subpopulation_shannons.append(subpopulation.shannon_diversity())
@@ -107,6 +134,12 @@ class Metapopulation():
     
     
     def traits_sets_per_subpopulation(self) -> List[int]:
+        """
+        Calculates number of unique sets of traits per each subpopulation.
+
+        Returns:
+            List[int]: list with the number of unique sets per subpopulation.
+        """
         subpopulation_counts = []
         for subpopulation in self.subpopulations:
             subpopulation_counts.append(subpopulation.count_traits_sets())
@@ -116,8 +149,10 @@ class Metapopulation():
     
     def metapopulation_shannon_diversity(self) -> float:
         """
-        This function counts the shannon diversity over the whole metapopulation. The function first
-        merges all subpopulations into one pot, then measures shannon diversity.
+        Calculates Shannon diversity trait over the whole metapopulation.
+
+        Returns:
+            float: Shannon diversity index of the metapopulation.
         """
         number_of_features = self.number_of_features
         traits = np.zeros((self.get_metapopulation_size(), number_of_features))
@@ -148,9 +183,10 @@ class Metapopulation():
     
     
     def metapopulation_test_sets(self) -> int:
-        """
-        This function counts the total of unique sets of traits in the whole metapopulation. The function first
-        merges all subpopulations into one pot, then counts different sets.
+        """Calculates number of unique sets of traits in the whole metapopulation.
+
+        Returns:
+            int: number of unique sets in the metapopulation.
         """
         number_of_features = self.number_of_features
         traits = np.zeros((self.get_metapopulation_size(), number_of_features))
@@ -166,6 +202,9 @@ class Metapopulation():
         
         
 class SubpopulationIterator(object):
+    """
+    An iterator object ot iterate over the SetOfSubpopulations class.
+    """
     def __init__(self, subpopulations):
         self.idx = 0
         self.data = subpopulations
@@ -181,6 +220,10 @@ class SubpopulationIterator(object):
 
 
 class SetOfSubpopulations(Set):
+    """
+    A class inheriting from Set to act as container of Subpopulation objects. Methods are standard for a Set.
+
+    """
     def __init__(self, number_of_subpopulations: int, type_of_interaction: str):
         self.subpopulations = []
         for subpopulation in range(number_of_subpopulations):
@@ -209,7 +252,7 @@ class SetOfSubpopulations(Set):
         """Returns the length of the SetOfIndividuals.
 
         Returns:
-            int: _description_
+            int: number of subpopulations in the set.
         """
         return len(self.subpopulations)
     

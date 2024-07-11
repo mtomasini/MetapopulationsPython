@@ -11,7 +11,24 @@ from .individual import Individual
 
 
 class Subpopulation():
+    """
+    The base class for a subpopulation in the metapopulation.
+    
+    Attributes:
+        id (int): Unique id of the subpopulation.
+        population (SetOfIndividuals): Set containing all the individuals in the subpopulation
+        outgoing_migrants (SetOfIndividuals): Set containing individuals that are being prepared for emigration. Empty outside of the migration step.
+        incoming_migrants (SetOfIndividuals): Set containind individuals that were received through immigration. Empty outside of the migration step.
+        type_of_interaction (str): The type of interaction to implement between individuals for cultural changes. Currently accepts only "axelrod_interaction".
+    """
     def __init__(self, id: int, type_of_interaction: str):
+        """
+        Create a new subpopulation.
+
+        Args:
+            id (int): Identifier of the population.
+            type_of_interaction (str): The type of interaction to implement between individuals for cultural changes. Currently accepts only "axelrod_interaction".
+        """
         self.id = id
         self.population = SetOfIndividuals(self)
         self.outgoing_migrants = SetOfIndividuals(self) # CONSIDER removing since migration works with incoming_migrants
@@ -19,27 +36,38 @@ class Subpopulation():
         self.type_of_interaction = type_of_interaction
         
         
-    def get_population_size(self):
+    def get_population_size(self) -> int:
+        """
+        Returns the current subpopulation size.
+
+        Returns:
+            int: Current subpopulation size.
+        """
         return len(self.population)
     
     
-    def get_current_number_of_migrants(self):
+    def get_current_number_of_migrants(self) -> int:
+        """
+        Returns the current number of incoming immigrants during. Only returns a non-zero number during the migration step.
+
+        Returns:
+            int: Current number of immigrants.
+        """
         return len(self.incoming_migrants)
     
         
     def list_migrants(self, migration_rate: float) -> None:
-        """This function creates a list of migrants that will be sent out of the subpopulation.
+        """Create a list of migrants that will be sent out of the subpopulation.
 
         Args:
-            migration_rate (float): the migration rate is defined as the expected percentage of population that will migrate at each generation.
+            migration_rate (float): The migration rate is defined as the expected percentage of population that will migrate at each generation.
 
         Returns:
-            List[Individual]: a simple list of individuals from the subpopulation.
+            List[Individual]: A list of individuals from the subpopulation.
         """
-        # CONSIDER removing this
+        # CONSIDER removing this function if self.outgoing_migrants falls out of use.
         size = self.get_population_size()
         number_of_migrants = np.random.binomial(size, migration_rate)
-        # indeces_to_migrate = random.sample(range(size), number_of_migrants)
         if number_of_migrants > 0:
             individuals_to_remove = self.population.sample_and_remove(number_of_migrants)
             for individual in individuals_to_remove:
@@ -47,13 +75,14 @@ class Subpopulation():
                 
     
     def receive_migrants(self, giving_subpopulation: "Subpopulation", migration_rate: float) -> None:
-        """This function populates the list of incoming migrants that come from a giving population.
+        """Populate the list of incoming migrants with individuals coming from a giving_subpopulation.
 
         Args:
-            migration_rate (float): the migration rate is defined as the expected percentage of population that will migrate at each generation.
+            giving_subpopulation (Subpopulation): Subpopulation from which individuals are migrating.
+            migration_rate (float): Percentage of the giving subpopulation that will migrate at each generation into the current subpopulation.
 
         Returns:
-            List[Individual]: a simple list of individuals from the subpopulation.
+            List[Individual]: A list of individuals from the giving subpopulation.
         """
         population_size = giving_subpopulation.get_population_size()
         number_of_migrants = np.random.binomial(population_size, migration_rate)
@@ -64,6 +93,9 @@ class Subpopulation():
             
                 
     def incorporate_migrants_in_population(self) -> None:
+        """
+        Merges incoming migrants into the local population.
+        """
         for individual in self.incoming_migrants:
             self.population.add(individual)
         
@@ -71,10 +103,19 @@ class Subpopulation():
         
         
     def add_individual(self, individual: "Individual") -> None:
+        """
+        Adds an individual to the subpopulation. This function does not remove the individual from somewhere else (in case of passages from list to list).
+
+        Args:
+            individual (Individual): individual to be added to the subpopulation.
+        """
         self.population.add(individual)
         
 
     def create_interaction(self) -> None:
+        """
+        Samples two individuals at random in the subpopulation and makes them interact.
+        """
         index_focus, index_interacting = np.random.choice(range(self.get_population_size()), 2)
         focus_individual = self.population.individuals[index_focus]
         interacting_individual = self.population.individuals[index_interacting]
@@ -85,6 +126,9 @@ class Subpopulation():
         """
         This function counts the total of unique sets of traits in the subpopulation. For example,
         [0, 1, 2, 3, 4] is a set different from [1, 1, 2, 3, 4], which is different from [5, 4, 3, 2, 1], etc.    
+        
+        Returns:
+            int: The current number of different sets of traits in the subpopulation.
         """
         number_of_features = self.population.individuals[0].number_of_features
         traits = np.zeros((self.get_population_size(), number_of_features))
@@ -100,11 +144,10 @@ class Subpopulation():
         
     def shannon_diversity(self) -> float:
         """
-        Shannon_diversity is measure of the richness / diversity in a subpopulation. The formula is
-        H' = -sum(p_i * ln(p_i))
-    
-        where p_i is the frequency of each species i in the whole sample. The "species" are each trait separately,
-        and the frequency is the occurrence of each trait in the population
+        Calculate the Shannon diversity index in the subpopulation.
+        
+        Returns:
+            float: The current Shannon diversity index in the subpopulation.
         """
         number_of_features = self.population.individuals[0].number_of_features
         traits = np.zeros((self.get_population_size(), number_of_features))
@@ -134,6 +177,9 @@ class Subpopulation():
         
       
 class IndividualsIterator(object):
+    """
+    An iterator object ot iterate over the SetOfSubpopulations class.
+    """
     def __init__(self, individuals):
         self.idx = 0
         self.data = individuals
@@ -149,6 +195,10 @@ class IndividualsIterator(object):
 
 
 class SetOfIndividuals(MutableSet):
+    """
+    A class inheriting from MutableSet to act as container of Individual objects. Methods are standard for a MutableSet.
+
+    """
     def __init__(self, deme: Subpopulation):
         self.individuals = []
         self.deme = deme.id
@@ -158,10 +208,10 @@ class SetOfIndividuals(MutableSet):
         """Checks if an agent is in the SetOfIndividuals.
 
         Args:
-            individual (Individual): an Individual in the set.
+            individual (Individual): An Individual in the set.
 
         Returns:
-            bool: whether the individual exists in the set.
+            bool: Whether the individual exists in the set.
         """
         return individual in self.individuals
     
@@ -169,7 +219,7 @@ class SetOfIndividuals(MutableSet):
         """Provides an iterator for the SetOfIndividuals.
 
         Returns:
-            Interator[Individual]: iterator for the set.
+            Interator[Individual]: Iterator for the set.
         """
         return IndividualsIterator(self.individuals)#.individuals.keys()
     
@@ -177,13 +227,13 @@ class SetOfIndividuals(MutableSet):
         """Returns the length of the SetOfIndividuals.
 
         Returns:
-            int: _description_
+            int: Number of individuals in the Set.
         """
         return len(self.individuals)
     
     def __getitem__(self, item: int | slice) -> Individual:
         """
-        Retrieve an agent or a slice of agents from the SetOfIndividuals. Took from mesa.agent.
+        Retrieve an agent or a slice of agents from the SetOfIndividuals. Taken from mesa.agent.
 
         Args:
             item (int | slice): The index or slice for selecting agents.
@@ -197,7 +247,7 @@ class SetOfIndividuals(MutableSet):
         """Adds an Individual to the SetOfIndividuals.
 
         Args:
-            individual (Individual): individual to add to the set.
+            individual (Individual): Individual to add to the set.
         """
         self.individuals.append(individual)
         
@@ -205,26 +255,40 @@ class SetOfIndividuals(MutableSet):
         """Eliminates an individual from the set (and from the population). 
 
         Args:
-            individual (Individual): individual to be discarded.
+            individual (Individual): Individual to be discarded.
         """
         del self.individuals[individual]
         
     def empty_set(self) -> None:
+        """
+        Empty the Set.
+        """
         self.individuals = []
         # for individual in self.individuals:
         #     self.discard(individual)
 
     def shuffle(self) -> None:
+        """
+        Shuffle the Set.
+        """
         random.shuffle(self.individuals)
         
-    def sample_and_remove(self, number_of_individuals) -> List[Individual]:
+    def sample_and_remove(self, number_of_individuals: int) -> List[Individual]:
+        """
+        Sample an individual, remove it from the Set and return it in a list.
+
+        Args:
+            number_of_individuals (int): Number of individuals to sample randomly. 
+
+        Returns:
+            List[Individual]: List of all the individuals that have been sampled from the population.
+        """
         self.shuffle()
         
         list_of_individuals = []
         for i in range(number_of_individuals):
             individual = self.individuals.pop()
             list_of_individuals.append(individual)
-            # self.discard(individual)
             
         return list_of_individuals
         
