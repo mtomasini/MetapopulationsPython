@@ -28,6 +28,14 @@ metapypulation.subpopulation module
    :undoc-members:
    :show-inheritance:
 
+metapypulation.simulation module
+-----------------------------------
+
+.. automodule:: metapypulation.simulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
