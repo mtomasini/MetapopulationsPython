@@ -9,9 +9,10 @@ from metapypulation.metapopulation import Metapopulation
 
 migrations = np.genfromtxt('./configs/island_model.csv', delimiter=',')
 
-migrations = migrations
+migrations = [[0, 0.001], [0.01, 0]]
+migrations = np.array(migrations)
 
-metapop = Metapopulation(4, "axelrod_interaction", migrations, carrying_capacities=100)
+metapop = Metapopulation(2, "axelrod_interaction", migrations, carrying_capacities=[100, 100])
 metapop.populate()
 
 shannon = []
@@ -30,11 +31,11 @@ for t in range(200001):
         print(f"Gen {t}!")
         for subpopulation in metapop.subpopulations:
             print(f"The current size of pop {subpopulation.id} is {subpopulation.get_population_size()}")
-            sub_id = []
-            for ind in subpopulation.population.individuals:
-                sub_id.append(ind.original_deme_id)
-            indexes, counts = np.unique(sub_id, return_counts=True)
-            print(f"The current deme index present in population {subpopulation.id} are {indexes} with {counts} counts.")
+            # sub_id = []
+            # for ind in subpopulation.population.individuals:
+            #     sub_id.append(ind.original_deme_id)
+            # indexes, counts = np.unique(sub_id, return_counts=True)
+            # print(f"The current deme index present in population {subpopulation.id} are {indexes} with {counts} counts.")
     
     metapop.migrate()
     metapop.make_interact()
@@ -48,5 +49,5 @@ print(f"{t} generations ran in {total_time}.")
 
 # counts_df = pd.DataFrame(set_counts)
 # print(counts_df)
-plt.plot(metapop_shannon)
+plt.plot(metapop_counts)
 plt.show()
