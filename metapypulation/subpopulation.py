@@ -45,6 +45,7 @@ class Subpopulation():
             for individual in individuals_to_remove:
                 self.outgoing_migrants.add(individual)   
                 
+    
     def receive_migrants(self, giving_subpopulation: "Subpopulation", migration_rate: float) -> None:
         """This function populates the list of incoming migrants that come from a giving population.
 
@@ -78,6 +79,58 @@ class Subpopulation():
         focus_individual = self.population.individuals[index_focus]
         interacting_individual = self.population.individuals[index_interacting]
         focus_individual.interact(interacting_individual, self.type_of_interaction)
+        
+    
+    def count_traits_sets(self) -> int:
+        """
+        This function counts the total of unique sets of traits in the population. For example,
+        [0, 1, 2, 3, 4] is a set different from [1, 1, 2, 3, 4], which is different from [5, 4, 3, 2, 1], etc.    
+        """
+        number_of_features = self.population.individuals[0].number_of_features
+        traits = np.zeros((self.get_population_size(), number_of_features))
+        i = 0
+        for individual in self.population:
+            traits[i] = (individual.features)
+            i += 1
+            
+        uniques = np.unique(traits, axis = 0)
+        
+        return len(uniques)    
+
+        
+    def shannon_diversity(self) -> float:
+        """
+        Shannon_diversity is measure of the richness / diversity in a patch. The formula is
+        H' = -sum(p_i * ln(p_i))
+    
+        where p_i is the frequency of each species i in the whole sample. The "species" are each trait separately,
+        and the frequency is the occurrence of each trait in the population
+        """
+        number_of_features = self.population.individuals[0].number_of_features
+        traits = np.zeros((self.get_population_size(), number_of_features))
+        i = 0
+        for individual in self.population:
+            traits[i] = (individual.features)
+            i += 1
+        
+        shannons = []
+        # looping over all features, for each feature extract the frequency of each trait in the population
+        for k in range(0, number_of_features):
+            frequencies = []
+            feature_traits = traits[:, k]
+            unique, counts = np.unique(feature_traits, return_counts=True)
+            for trait_count in counts:
+                trait_frequency = trait_count / (self.get_population_size())
+                frequencies.append(trait_frequency)
+            
+            frequencies = np.array(frequencies)
+            shannon_for_trait = -np.sum(frequencies*np.log(frequencies))
+            
+            shannons.append(shannon_for_trait)
+
+        shannon_index = np.mean(shannons)
+        
+        return shannon_index
         
       
 class IndividualsIterator(object):

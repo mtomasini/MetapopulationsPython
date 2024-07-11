@@ -90,7 +90,21 @@ class Metapopulation():
         for subpopulation in self.subpopulations:
             subpopulation.create_interaction()
             
+        
+    def metapopulation_shannon_diversity(self) -> List[float]:
+        subpopulation_shannons = []
+        for subpopulation in self.subpopulations:
+            subpopulation_shannons.append(subpopulation.shannon_diversity())
             
+        return subpopulation_shannons
+    
+    
+    def metapopulation_count_traits_sets(self) -> List[int]:
+        subpopulation_counts = []
+        for subpopulation in self.subpopulations:
+            subpopulation_counts.append(subpopulation.count_traits_sets())
+            
+        return subpopulation_counts
         
         
 class SubpopulationIterator(object):
