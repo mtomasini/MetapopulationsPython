@@ -12,7 +12,7 @@ Metapypulation has three main classes:
 
 ## Cultural traits
 
-Currently, each individual's culture is represented by a set of $N$ features. Each feature in turn can assume one of $\nu$ traits. These features represent different (assumed) independent facets of culture: one could be language, burial tradition, boat building features, *etc*. So each individual is currently represented by a vector of integers.
+Currently, each individual's culture is represented by a set of {math}`N` features. Each feature in turn can assume one of {math}`\nu` traits. These features represent different (assumed) independent facets of culture: one could be language, burial tradition, boat building features, *etc*. So each individual is currently represented by a vector of integers.
 
 ### Axelrod model
 
@@ -22,10 +22,14 @@ While we plan on adding several different ways for individuals to interact and c
 
 Currently, there are two diversity measures implemented at the level of both the subpopulation and the whole metapopulation. The first is the Shannon diversity index, which for each feature is measured as
 
-$$ H^{\prime} = - \sum_{i = 1}^{\nu} p_i \ln p_i , $$
+```{math}
+H^{\prime} = - \sum_{i = 1}^{\nu} p_i \ln p_i ,
+```
 
-where $p_i$ is the frequency of trait $i$ in the subpopulation / metapopulation. Then, the Shannon diversity index that we measure is the average of the index for each trait,
+where {math}`p_i` is the frequency of trait {math}`i` in the subpopulation / metapopulation. Then, the Shannon diversity index that we measure is the average of the index for each trait,
 
-$$ \bar{H} = H^{\prime} .$$
+```{math}
+\bar{H} = H^{\prime} .
+```
 
 The second diversity measure that we calculate is the number of unique sets of traits. This is done through the function `np.unique(..., return_counts = True)`.
