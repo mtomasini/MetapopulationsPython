@@ -83,7 +83,7 @@ class Subpopulation():
     
     def count_traits_sets(self) -> int:
         """
-        This function counts the total of unique sets of traits in the population. For example,
+        This function counts the total of unique sets of traits in the subpopulation. For example,
         [0, 1, 2, 3, 4] is a set different from [1, 1, 2, 3, 4], which is different from [5, 4, 3, 2, 1], etc.    
         """
         number_of_features = self.population.individuals[0].number_of_features
@@ -100,7 +100,7 @@ class Subpopulation():
         
     def shannon_diversity(self) -> float:
         """
-        Shannon_diversity is measure of the richness / diversity in a patch. The formula is
+        Shannon_diversity is measure of the richness / diversity in a subpopulation. The formula is
         H' = -sum(p_i * ln(p_i))
     
         where p_i is the frequency of each species i in the whole sample. The "species" are each trait separately,

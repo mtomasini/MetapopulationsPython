@@ -16,12 +16,16 @@ metapop.populate()
 
 shannon = []
 set_counts = []
+metapop_counts = []
+metapop_shannon = []
 
 start_time = time.time()
-for t in range(300001):
+for t in range(200001):
     if t%100 == 0:
-        set_counts.append(metapop.metapopulation_count_traits_sets())
-        shannon.append(metapop.metapopulation_shannon_diversity())
+        set_counts.append(metapop.traits_sets_per_subpopulation())
+        shannon.append(metapop.shannon_diversity_per_subpopulation())
+        metapop_counts.append(metapop.metapopulation_test_sets())
+        metapop_shannon.append(metapop.metapopulation_shannon_diversity())
     if t%50000 == 0:
         print(f"Gen {t}!")
         for subpopulation in metapop.subpopulations:
@@ -42,8 +46,7 @@ total_time = time.strftime("%H:%M:%S", time.gmtime(total_time))
 
 print(f"{t} generations ran in {total_time}.")
 
-counts_df = pd.DataFrame(set_counts)
-counts_df.to_csv('./Outputs/island.csv', index=False)
+# counts_df = pd.DataFrame(set_counts)
 # print(counts_df)
-# counts_df.plot()
-# plt.show()
+plt.plot(metapop_shannon)
+plt.show()

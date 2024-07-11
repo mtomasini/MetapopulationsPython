@@ -10,7 +10,7 @@ import pandas as pd
 from typing import List
 
 from .individual import Individual
-from .subpopulation import Subpopulation
+from .subpopulation import Subpopulation, SetOfIndividuals
 
 class Metapopulation():
     def __init__(self, number_of_subpopulations: int, 
@@ -83,6 +83,13 @@ class Metapopulation():
         for subpopulation in self.subpopulations:
             subpopulation.incorporate_migrants_in_population() 
             
+            
+    def get_metapopulation_size(self) -> int:
+        population_size = 0
+        for subpopulation in self.subpopulations:
+            population_size += subpopulation.get_population_size()
+    
+        return population_size
     
     def make_interact(self):
         """Function that starts interactions within each subpopulation.
@@ -91,7 +98,7 @@ class Metapopulation():
             subpopulation.create_interaction()
             
         
-    def metapopulation_shannon_diversity(self) -> List[float]:
+    def shannon_diversity_per_subpopulation(self) -> List[float]:
         subpopulation_shannons = []
         for subpopulation in self.subpopulations:
             subpopulation_shannons.append(subpopulation.shannon_diversity())
@@ -99,12 +106,63 @@ class Metapopulation():
         return subpopulation_shannons
     
     
-    def metapopulation_count_traits_sets(self) -> List[int]:
+    def traits_sets_per_subpopulation(self) -> List[int]:
         subpopulation_counts = []
         for subpopulation in self.subpopulations:
             subpopulation_counts.append(subpopulation.count_traits_sets())
             
         return subpopulation_counts
+    
+    
+    def metapopulation_shannon_diversity(self) -> float:
+        """
+        This function counts the shannon diversity over the whole metapopulation. The function first
+        merges all subpopulations into one pot, then measures shannon diversity.
+        """
+        number_of_features = self.number_of_features
+        traits = np.zeros((self.get_metapopulation_size(), number_of_features))
+        i = 0
+        for subpopulation in self.subpopulations:
+            for individual in subpopulation.population:
+                traits[i] = (individual.features)
+                i += 1
+        
+        shannons = []
+        # looping over all features, for each feature extract the frequency of each trait in the population
+        for k in range(0, number_of_features):
+            frequencies = []
+            feature_traits = traits[:, k]
+            unique, counts = np.unique(feature_traits, return_counts=True)
+            for trait_count in counts:
+                trait_frequency = trait_count / (self.get_metapopulation_size())
+                frequencies.append(trait_frequency)
+            
+            frequencies = np.array(frequencies)
+            shannon_for_trait = -np.sum(frequencies*np.log(frequencies))
+            
+            shannons.append(shannon_for_trait)
+
+        shannon_index = np.mean(shannons)
+        
+        return shannon_index
+    
+    
+    def metapopulation_test_sets(self) -> int:
+        """
+        This function counts the total of unique sets of traits in the whole metapopulation. The function first
+        merges all subpopulations into one pot, then counts different sets.
+        """
+        number_of_features = self.number_of_features
+        traits = np.zeros((self.get_metapopulation_size(), number_of_features))
+        i = 0
+        for subpopulation in self.subpopulations:
+            for individual in subpopulation.population:
+                traits[i] = (individual.features)
+                i += 1
+            
+        uniques = np.unique(traits, axis = 0)
+        
+        return len(uniques)  
         
         
 class SubpopulationIterator(object):
