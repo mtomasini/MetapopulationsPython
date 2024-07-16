@@ -2,6 +2,7 @@
 A module containing the tools to simulate a metapopulation and output the result in data tables.
 """
 
+from itertools import product
 import numpy as np
 import pandas as pd
 from typing import List
@@ -39,6 +40,7 @@ class Simulation():
                  carrying_capacities: List[int] | int,
                  replicates: int,
                  output_path: str,
+                 migration_rate: float = 0.001,
                  measure_timing: int = 100,
                  verbose: bool = True,
                  verbose_timing: int = 10000):
@@ -48,11 +50,12 @@ class Simulation():
         Args:
             generations (int): Number of generations to simulate.
             number_of_subpopulations (int): Number of subpopulations in the metapopulation.
-            migration_matrix (str | np.ndarray): Type of migration topology. Either a string to fetch a .csv from the /configs or a numpy array matrix.
+            migration_matrix (str | np.ndarray): Type of migration topology. Either a string to generate a table or a numpy array matrix.
             interaction (str): Type of interaction between individuals. Currently accepts only "axelrod_interaction".
             carrying_capacities (List[int] | int): Initial population size of each subpopulation. Either a list with a carrying capacity for each subpopulation, or an int with equal carrying capacity for all subpopulations.
             replicates (int): Number of replicates to simulate.
             output_path (str): Path of folder in which to save results. Creates new folder if it does not exist.
+            migration_rate (float): Migration rate between 0 and 1 used to generate a migration matrix when there is str input. Used only in the function `create_migration_table()`.
             measure_timing (int, optional): Number of generations between measurements. Defaults to 100.
             verbose (bool, optional): Whether to print text during the simulation. Defaults to True.
             verbose_timing (int, optional): Number of generations between each print statement. Defaults to 10000.  
@@ -71,7 +74,8 @@ class Simulation():
         
         match migration_matrix:
             case str():
-                self.migration_matrix = np.genfromtxt(f'./configs/{migration_matrix}.csv', delimiter=',')
+                print("here!")
+                self.create_migration_table(migration_matrix, migration_rate)# np.genfromtxt(f'./configs/{migration_matrix}.csv', delimiter=',')
             case np.ndarray():
                 self.migration_matrix = migration_matrix
                 
@@ -80,6 +84,7 @@ class Simulation():
         self.metapop_set_counts = pd.DataFrame()
         self.metapop_shannon = pd.DataFrame()
         
+    
     def empty_lists(self):
         self.subpop_set_counts = pd.DataFrame()
         self.subpop_shannon = pd.DataFrame()
@@ -87,7 +92,7 @@ class Simulation():
         self.metapop_shannon = pd.DataFrame()
 
         
-    def run_replicate(self, replicate_id: int):
+    def run_replicate(self, replicate_id: int) -> None:
         """
         Run one replicate of the simulation.
 
@@ -121,7 +126,7 @@ class Simulation():
         self.subpop_set_counts = pd.concat([self.subpop_set_counts, pd.Series(set_counts, name=replicate_id)], axis=1)
         self.subpop_shannon = pd.concat([self.subpop_shannon, pd.Series(shannon, name=replicate_id)], axis=1)
         self.metapop_set_counts = pd.concat([self.metapop_set_counts, pd.Series(metapop_counts, name=replicate_id)], axis=1)
-        self.metapop_shannon = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
+        self.metapop_shannoneturn  = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
                              
         if self.verbose:
             end_time = time.time()
@@ -131,7 +136,7 @@ class Simulation():
             print(f"{t} generations ran in {total_time}.")
            
 
-    def run_simulation(self):
+    def run_simulation(self) -> None:
         """
         Run all the replicates and print some outputs.
         """
@@ -162,8 +167,7 @@ class Simulation():
             
         self.save_output()
             
-            
-    def save_output(self):
+    def save_output(self) -> None:
         """
         Save output to input folder.
         """
@@ -171,3 +175,25 @@ class Simulation():
         self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
         self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",")
         self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")
+        
+    
+    def create_migration_table(self, type_of_model, migration_rate: float) -> None:
+        """
+        Create a migration table for the number of subpopulations in the case of Island or Stepping Stone model.
+
+        Args:
+            type (str): type of model. Either "island" or "stepping_stone"
+            migration_rate (float): float between 0 and 1 representing the migration rate for the table.
+        """
+        migration_matrix = np.zeros((self.number_of_subpopulations, self.number_of_subpopulations))
+        match type_of_model:
+            case 'island':
+                for (i, j) in product(range(self.number_of_subpopulations), range(self.number_of_subpopulations)):
+                    if (i != j):
+                        migration_matrix[i, j] = migration_rate
+            case 'stepping_stone':
+                for (i, j) in product(range(self.number_of_subpopulations), range(self.number_of_subpopulations)):
+                    if (np.abs(i - j) == 1):
+                        migration_matrix[i, j] = migration_rate
+                        
+        self.migration_matrix = migration_matrix
