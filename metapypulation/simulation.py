@@ -79,6 +79,7 @@ class Simulation():
         self.subpop_shannon = pd.DataFrame()
         self.metapop_set_counts = pd.DataFrame()
         self.metapop_shannon = pd.DataFrame()
+
         
     def run_replicate(self, replicate_id: int):
         """
@@ -115,8 +116,7 @@ class Simulation():
         self.subpop_shannon = pd.concat([self.subpop_shannon, pd.Series(shannon, name=replicate_id)], axis=1)
         self.metapop_set_counts = pd.concat([self.metapop_set_counts, pd.Series(metapop_counts, name=replicate_id)], axis=1)
         self.metapop_shannon = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
-                    
-                    
+                             
         if self.verbose:
             end_time = time.time()
             total_time = end_time - start_time
@@ -124,9 +124,10 @@ class Simulation():
 
             print(f"{t} generations ran in {total_time}.")
            
+
     def run_simulation(self):
         """
-        Runs all the replicates and print some outputs.
+        Run all the replicates and print some outputs.
         """
         if self.verbose:
             match self.migration_matrix:
@@ -138,9 +139,14 @@ class Simulation():
         for replicate in range(1, self.replicates + 1):
             self.run_replicate(replicate)
             
+        self.save_output()
+            
             
     def save_output(self):
         """
         Save output to input folder.
         """
-        pass
+        self.subpop_set_counts.to_csv(f"{self.output_path}_subpop_set_counts.csv", sep=",", index=False)
+        self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",", index=False)
+        self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",", index=False)
+        self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",", index=False)
