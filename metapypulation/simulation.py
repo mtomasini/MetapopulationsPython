@@ -79,6 +79,12 @@ class Simulation():
         self.subpop_shannon = pd.DataFrame()
         self.metapop_set_counts = pd.DataFrame()
         self.metapop_shannon = pd.DataFrame()
+        
+    def empty_lists(self):
+        self.subpop_set_counts = pd.DataFrame()
+        self.subpop_shannon = pd.DataFrame()
+        self.metapop_set_counts = pd.DataFrame()
+        self.metapop_shannon = pd.DataFrame()
 
         
     def run_replicate(self, replicate_id: int):
@@ -129,6 +135,7 @@ class Simulation():
         """
         Run all the replicates and print some outputs.
         """
+        
         if self.verbose:
             match self.migration_matrix:
                 case str():
@@ -136,8 +143,22 @@ class Simulation():
                 case np.ndarray():
                     print(f"Simulating {self.replicates} replicates of a custom migration model with {self.number_of_subpopulations}.")
         
+        start_time = time.time()
         for replicate in range(1, self.replicates + 1):
             self.run_replicate(replicate)
+            if self.verbose:
+                end_time = time.time()
+                total_time = end_time - start_time
+                total_time = time.strftime("%H:%M:%S", time.gmtime(total_time))
+
+                print(f"Replicate {replicate} ran in {total_time}.")
+            
+        if self.verbose:
+            end_time = time.time()
+            total_time = end_time - start_time
+            total_time = time.strftime("%H:%M:%S", time.gmtime(total_time))
+            
+            print(f"The simulation ran in {total_time}.")
             
         self.save_output()
             
@@ -146,7 +167,7 @@ class Simulation():
         """
         Save output to input folder.
         """
-        self.subpop_set_counts.to_csv(f"{self.output_path}_subpop_set_counts.csv", sep=",", index=False)
-        self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",", index=False)
-        self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",", index=False)
-        self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",", index=False)
+        self.subpop_set_counts.to_csv(f"{self.output_path}_subpop_set_counts.csv", sep=",")
+        self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
+        self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",")
+        self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")

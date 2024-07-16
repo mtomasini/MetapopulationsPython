@@ -3,18 +3,24 @@ import numpy as np
 
 from metapypulation.simulation import Simulation
 
-total_population = 1000
+total_population = 400
 
-migrations = np.genfromtxt('./configs/island_model.csv', delimiter=',')
-subpopulations = migrations.shape[0]
-carrying_capacity = np.ceil(total_population / subpopulations)
+#migrations_island = np.genfromtxt('./configs/island_model.csv', delimiter=',')
+#migrations_stepping = np.genfromtxt('./configs/stepping_stone.csv', delimiter=',')
 
-generations = 100000
+for migrations in ['island_model', 'stepping_stone']:  
+        
+    subpopulations = 8
 
-simulation = Simulation(generations, 
-                        migrations.shape[0], 
-                        migrations, 
-                        "axelrod_interaction",
-                        carrying_capacity,
-                        10,
-                        f"./Outputs/pop{total_population}")
+    carrying_capacity = int(np.ceil(total_population / subpopulations))
+    generations = 200000
+
+    simulation = Simulation(generations, 
+                            subpopulations, 
+                            migrations, 
+                            "axelrod_interaction",
+                            carrying_capacity,
+                            10,
+                            f"./Outputs/pop{total_population}/{migrations}/4subpop")
+
+    simulation.run_simulation()
