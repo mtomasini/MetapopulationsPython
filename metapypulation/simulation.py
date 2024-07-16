@@ -71,10 +71,9 @@ class Simulation():
         
         self.verbose = verbose
         self.verbose_timing = verbose_timing
-        
+
         match migration_matrix:
             case str():
-                print("here!")
                 self.create_migration_table(migration_matrix, migration_rate)# np.genfromtxt(f'./configs/{migration_matrix}.csv', delimiter=',')
             case np.ndarray():
                 self.migration_matrix = migration_matrix

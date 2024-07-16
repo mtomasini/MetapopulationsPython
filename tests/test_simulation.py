@@ -10,3 +10,8 @@ def test_create_migration_table():
     assert simulation.migration_matrix.shape == (7,7)
     assert np.allclose(simulation.migration_matrix[0], np.array([0.0, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0]))
     
+    simulation = Simulation(100, 3, 'stepping_stone', 'axelrod_interaction', 100, 1, 
+                            'something.csv', migration_rate = 0.1)
+    assert simulation.migration_matrix.shape == (3,3)
+    assert np.allclose(simulation.migration_matrix[0], np.array([0.0, 0.1, 0.0]))
+    

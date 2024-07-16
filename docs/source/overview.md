@@ -6,11 +6,11 @@ Metapypulation is a package to simulate the spread of culture in a metapopulatio
 
 Metapypulation has three main classes:
 
-- an `Individual` class, which represents each individual in the metapopulation. 
-- a `Subpopulation` class, representing the different discrete subpopulations that compose the metapopulation;
-- finally, a `Metapopulation` class, which puts `Individual` and `Subpopulation` together and have individuals interacting in this world.
+- an [`Individual`](https://mtomasini.github.io/MetapopulationsPython/metapypulation.html#module-metapypulation.individual) class, which represents each individual in the metapopulation.
+- a [`Subpopulation`](https://mtomasini.github.io/MetapopulationsPython/metapypulation.html#module-metapypulation.subpopulation) class, representing the different discrete subpopulations that compose the metapopulation;
+- finally, a [`Metapopulation`](https://mtomasini.github.io/MetapopulationsPython/metapypulation.html#module-metapypulation.metapopulation) class, which puts `Individual` and `Subpopulation` together and have individuals interacting in this world.
 
-In addition, I provide a `Simulation` class, which allows to run a simulation with several replicates, which outputs different measurements ([see below](#diversity-measures)). The class also provides some quick tools to plot the results of the simulation.
+In addition, I provide a [`Simulation`](https://mtomasini.github.io/MetapopulationsPython/metapypulation.html#module-metapypulation.simulation) class, which allows to run a simulation with several replicates, which outputs different measurements ([see below](#diversity-measures)). The class also provides some quick tools to plot the results of the simulation.
 
 ## Cultural traits
 
