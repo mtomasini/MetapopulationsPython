@@ -39,7 +39,9 @@ class Individual():
     
     def axelrod_interaction(self, interacting_individual: "Individual") -> None:
         """
-        Interaction following the Axelrod model of culture dissemination.
+        Interaction following the Axelrod model of culture dissemination. A random individual (source) is selected. The probability of interacting is given 
+        by the number of traits in common between the focal individual (self) and the source divided by the total number of features. If they interact, 
+        the focal individual copies one of the features of the source for which they are not equal.
 
         Args:
             interacting_individual (Individual): Individual with which the self individual interacts. Currently accepts only "axelrod_interaction".
@@ -51,15 +53,27 @@ class Individual():
             self.features[index] = interacting_individual.features[index]
             self.number_of_changes += 1
             
+    def neutral_interaction(self, interacting_individual: "Individual") -> None:
+        """
+        Interaction following a neutral model, where replication of a trait is purely based on frequency in the population. The focal indivdual changes one 
+        trait at random copying from the source individual.
+        """
+        index = np.random.choice(range(0, self.number_of_features))
+        self.features[index] = interacting_individual.features[index]
+        self.number_of_changes += 1
+            
             
     def interact(self, interacting_individual: "Individual", interaction_function: str) -> None:
         """
         Wrapper for interactions, it allows to pass any interaction that is coded for.
 
         Args:
+            interaction_function (str): The type of interaction that decides the outcome of the interaction. Current options are "neutral_interaction" and "axelrod_interaction".
             interacting_individual (Individual): Individual with which the self individual interacts.
-            interaction_function (str): The type of interaction that decides the outcome of the interaction. Current options are only "axelrod_interaction".
         """
         match interaction_function:
+            case "neutral_interaction":
+                self.neutral_interaction(interacting_individual)
             case "axelrod_interaction":
                 self.axelrod_interaction(interacting_individual)
+                    

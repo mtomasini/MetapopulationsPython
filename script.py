@@ -10,7 +10,7 @@ total_population = 400
 
 for migrations in ['stepping_stone']:  
         
-    subpopulations = 4
+    subpopulations = 8
     rate_of_migration = 0.001
 
     carrying_capacity = int(np.ceil(total_population / subpopulations))
