@@ -221,6 +221,7 @@ class Simulation():
             print(f"The simulation ran in {total_time}.")
             
         self.save_output()
+           
             
     def save_output(self) -> None:
         """

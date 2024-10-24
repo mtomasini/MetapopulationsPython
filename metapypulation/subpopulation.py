@@ -120,7 +120,24 @@ class Subpopulation():
         focus_individual = self.population.individuals[index_focus]
         interacting_individual = self.population.individuals[index_interacting]
         focus_individual.interact(interacting_individual, self.type_of_interaction)
-        
+    
+
+    def return_traits_sets(self) -> np.ndarray:
+        """
+        This function returns all the feature sets found in a subpopulation in an array.
+
+        Returns:
+            np.ndarray: All the current sets of features in the subpopulation.
+        """
+        number_of_features = self.population.individuals[0].number_of_features
+        traits = np.zeros((self.get_population_size(), number_of_features))
+        i = 0
+        for individual in self.population:
+            traits[i] = (individual.features)
+            i += 1
+
+        return traits
+
     
     def count_traits_sets(self) -> int:
         """
@@ -130,17 +147,33 @@ class Subpopulation():
         Returns:
             int: The current number of different sets of traits in the subpopulation.
         """
-        number_of_features = self.population.individuals[0].number_of_features
-        traits = np.zeros((self.get_population_size(), number_of_features))
-        i = 0
-        for individual in self.population:
-            traits[i] = (individual.features)
-            i += 1
-            
+        traits = self.return_traits_sets()    
+        
         uniques = np.unique(traits, axis = 0)
         
-        return len(uniques)    
+        return len(uniques)   
 
+
+    def is_trait_in_subpopulation(self, trait: int, feature: int = None) -> bool:
+        """
+        This function checks whether a given trait at a given feature is in the population.
+
+        Args:
+            trait (int): the int referring to the trait that needs to be checked against
+            feature (Optional, int): the feature that needs to be checked (index from 0 to N_features-1). If None, it checks for the trait in any feature. Default is None.
+        Returns:
+            bool: True if the trait is found in the subpopulation.
+        """ 
+        traits = self.return_traits_sets()
+
+        if feature is None:
+            feature_is_found = (trait in traits)
+
+        else: 
+            feature_is_found = (trait in traits[:,feature])
+
+        return feature_is_found
+            
         
     def shannon_diversity(self) -> float:
         """
