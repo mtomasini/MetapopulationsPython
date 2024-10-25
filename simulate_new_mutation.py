@@ -12,6 +12,7 @@ To insert a new mutation:
 
 """
 
+import math
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -20,24 +21,25 @@ from metapypulation.subpopulation import Subpopulation
 from metapypulation.individual import Individual
 
 total_population = 400
-interaction = "Axelrod_interaction"
+interaction = "axelrod_interaction"
 N_subpopulations = 8
+subpop_size = math.ceil(total_population / N_subpopulations)
 deme_of_new_mutation = 3 # 4th deme of 8
 new_value = 35
 
 migrations = np.genfromtxt('./configs/stepping_stone_8pop.csv', delimiter=',')
 migrations_zero = np.zeros((8,8))
 
-burn_in = 10000 # 250000
+burn_in = 10000
 first_epoch = 0
-burn_out = 10000 #2000000
+burn_out = 100000 #2000000
 
-replicates = 10
+replicates = 200
 
+successes = []
 
-
-for i in range(replicates):
-    metapop = Metapopulation(N_subpopulations, interaction, migration_matrix = migrations, carrying_capacities=int(total_population/N_subpopulations))
+for i in range(1, replicates + 1):
+    metapop = Metapopulation(N_subpopulations, interaction, migration_matrix = migrations, carrying_capacities=subpop_size)
     metapop.populate()
 
     counts_pop_1 = []
@@ -51,7 +53,6 @@ for i in range(replicates):
     counts_metapop = []
 
     subpops_with_mutation = []
-    print(f"Replicate {i}")
 
     # BURN-IN PHASE
     for t in range(burn_in):
@@ -103,16 +104,11 @@ for i in range(replicates):
     
     # change individual first feature
     deme_selected.population[random_individual_id].features[0] = new_value
-    # update the count of subpopulations with the mutation present
-    subpops_with_mutation[-1] = 1
+    #subpops_with_mutation[-1] = 1
+
     mutation_has_died = False
-
-
     # 
     for t in range(burn_in + first_epoch, burn_in + first_epoch + burn_out):
-        if mutation_has_died:
-            print(f"Finished in generation {t + burn_in + first_epoch}")
-            break
 
         if t%1000 == 0:
             counts_pop_1.append(metapop.subpopulations[0].count_traits_sets())
@@ -129,9 +125,12 @@ for i in range(replicates):
             for subpop in metapop.subpopulations:
                 feature_tests.append(subpop.is_trait_in_subpopulation(new_value))
 
-            subpops_with_mutation.append(sum(feature_tests))
-            if not any(subpops_with_mutation):
+            if not any(feature_tests):
+                subpops_with_mutation.append(0)
                 mutation_has_died = True
+            else:
+                subpops_with_mutation.append(sum(feature_tests))
+
 
         # if t%50000 == 0:
         #     print(f"Gen {t + burn_in}!")
@@ -146,4 +145,22 @@ for i in range(replicates):
         metapop.migrate()
         metapop.make_interact()
 
-    print(f"Replicate {i}: mutation present in {subpops_with_mutation[-1]} demes")
+        if mutation_has_died:
+            print(f"Finished in generation {t + burn_in + first_epoch}")
+            break
+        
+    if t == burn_in + first_epoch + burn_out - 1:
+        print(f"Replicate {i}: mutation present in {subpops_with_mutation[-1]} demes")
+        successes.append(1)
+        plt.plot(subpops_with_mutation)
+        plt.xlabel("generations (x1000)")
+        plt.ylabel("number of subpopulations where the new trait can be found")
+        plt.show()
+
+success = sum(successes)
+print(success / replicates)
+
+# plt.plot(subpops_with_mutation)
+# plt.xlabel("generations (x1000)")
+# plt.ylabel("number of subpopulations where the new trait can be found")
+# plt.show()
