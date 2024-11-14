@@ -228,9 +228,9 @@ class Simulation():
         Save output to input folder.
         """
         self.subpop_set_counts.to_csv(f"{self.output_path}_subpop_set_counts.csv", sep=",")
-        self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
+        #self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
         self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",")
-        self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")
+        #self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")
         
     
     def create_migration_table(self, type_of_model, migration_rate: float) -> None:
