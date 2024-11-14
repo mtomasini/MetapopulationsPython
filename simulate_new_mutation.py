@@ -21,7 +21,7 @@ from metapypulation.subpopulation import Subpopulation
 from metapypulation.individual import Individual
 
 total_population = 400
-interaction = "axelrod_interaction"
+interaction = "neutral_interaction"
 N_subpopulations = 8
 subpop_size = math.ceil(total_population / N_subpopulations)
 deme_of_new_mutation = 3 # 4th deme of 8
@@ -34,7 +34,7 @@ burn_in = 10000
 first_epoch = 0
 burn_out = 100000 #2000000
 
-replicates = 200
+replicates = 1000
 
 successes = []
 
@@ -152,10 +152,10 @@ for i in range(1, replicates + 1):
     if t == burn_in + first_epoch + burn_out - 1:
         print(f"Replicate {i}: mutation present in {subpops_with_mutation[-1]} demes")
         successes.append(1)
-        plt.plot(subpops_with_mutation)
-        plt.xlabel("generations (x1000)")
-        plt.ylabel("number of subpopulations where the new trait can be found")
-        plt.show()
+        # plt.plot(subpops_with_mutation)
+        # plt.xlabel("generations (x1000)")
+        # plt.ylabel("number of subpopulations where the new trait can be found")
+        # plt.show()
 
 success = sum(successes)
 print(success / replicates)

@@ -53,7 +53,7 @@ class Simulation():
             generations (int): Number of generations to simulate.
             number_of_subpopulations (int): Number of subpopulations in the metapopulation.
             migration_matrix (str | np.ndarray): Type of migration topology. Either a string to generate a table or a numpy array matrix.
-            interaction (str): Type of interaction between individuals. Currently accepts only "axelrod_interaction".
+            interaction (str): Type of interaction between individuals. Currently accepts only "axelrod_interaction" and "neutral_interaction".
             carrying_capacities (List[int] | int): Initial population size of each subpopulation. Either a list with a carrying capacity for each subpopulation, or an int with equal carrying capacity for all subpopulations.
             replicates (int): Number of replicates to simulate.
             output_path (str): Path of folder in which to save results. TODO Creates new folder if it does not exist.

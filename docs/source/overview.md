@@ -16,6 +16,10 @@ In addition, I provide a [`Simulation`](https://mtomasini.github.io/Metapopulati
 
 Currently, each individual's culture is represented by a set of {math}`N` features. Each feature in turn can assume one of {math}`\nu` traits. These features represent different (assumed) independent facets of culture: one could be language, burial tradition, boat building features, *etc*. So each individual is currently represented by a vector of integers.
 
+### Neutral model
+
+The Neutral model follows loosely the set up selected by other authors working on the spread of cultural traits (_e.g._ *Patterns in space and time: simulating cultural transmission in archaeology*, Marko Porčić). While in most works the Neutral Model assumes some sort of mutation rate in the traits, in the form of errors in the process of copying traits, we assume no copying error and instead use the simplest model where one focal individual at random in each subpopulation and each generation copies one trait at random from another individual in the same sub-population. Because of the absence of mutations, given enough time, this process is expected to lead to uniformity in an isolated subpopulation. 
+
 ### Axelrod model
 
 While we plan on adding several different ways for individuals to interact and change their traits, as of July 2024 the only such way to interact is shaped upon the **Axelrod model of culture dissemination** (*The Dissemination of Culture: A Model with Local Convergence and Global Polarization*, Robert Axelrod (1997), The Journal of Conflict Resolution, vol. 41, no. 2). In this model, at each generation an individual is chosen at random to copy a trait from a neighboring source on a lattice; the copy occurs with a probability proportional to the total similarity of the two random individuals. This mimicks homophily - the principle by which two individuals that resemble each other have a higher chance of having an exchange than two individuals that are completely different. In the metapopulation model that I developed, for each subpopulation we pick two random individuals that will act as target and source of the copy.
