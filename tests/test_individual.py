@@ -18,3 +18,11 @@ def test_axelrod_interaction():
     assert np.allclose(individual_1.features, individual_2.features)
     assert individual_1.number_of_changes == 1
     assert individual_2.number_of_changes == 0
+
+
+def test_init():
+    individual_1 = Individual(1, 1, 5, 10)
+    individual_2 = Individual(1, 1, 5, 10, [1, 5, 3, 0, 9])
+
+    assert len(individual_1.features) == individual_1.number_of_features
+    assert individual_2.features == [1, 5, 3, 0, 9]

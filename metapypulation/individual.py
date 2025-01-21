@@ -3,7 +3,7 @@ A module containing the individual class.
 """
 
 import numpy as np
-from typing import Callable
+from typing import Callable, List
 
 class Individual():
     """
@@ -17,7 +17,7 @@ class Individual():
         features (List[int]): List of features of the individual.
         number_of_changes (int): The number of times this individual has changed set of features following an interaction.
     """
-    def __init__(self, id: int, original_deme_id: int, number_of_features: int, number_of_traits: int):
+    def __init__(self, id: int, original_deme_id: int, number_of_features: int, number_of_traits: int, features: List = None):
         """
         Create a new individual with a random set of features.
 
@@ -26,14 +26,22 @@ class Individual():
             original_deme_id (int): Identifier of the deme where the individual originated.
             number_of_features (int): Number of cultural features of the individual.
             number_of_traits (int): Number of traits per feature of the individual.
+            features (List, optional): Preset set of features of the individual. Default is None.
         """
         self.id = id
         self.original_deme_id = original_deme_id
         self.number_of_features = number_of_features
         self.number_of_traits = number_of_traits
         
-        # number of traits is +1 as the argument high is exclusive
-        self.features = np.random.randint(low = 1, high = number_of_traits + 1, size = number_of_features)
+        if features is None:
+            # number of traits is +1 as the argument high is exclusive
+            self.features = np.random.randint(low = 1, high = number_of_traits + 1, size = number_of_features)
+        else:
+            if len(features) == number_of_features:
+                self.features = features
+            else:
+                raise ValueError("The input number of features does not match the input set of features!")
+
         self.number_of_changes = 0
         
     
