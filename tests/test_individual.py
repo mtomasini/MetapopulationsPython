@@ -22,7 +22,7 @@ def test_axelrod_interaction():
 
 def test_init():
     individual_1 = Individual(1, 1, 5, 10)
-    individual_2 = Individual(1, 1, 5, 10, [1, 5, 3, 0, 9])
+    individual_2 = Individual(1, 1, 5, 10, features=[1, 5, 3, 0, 9])
 
     assert len(individual_1.features) == individual_1.number_of_features
     assert individual_2.features == [1, 5, 3, 0, 9]
