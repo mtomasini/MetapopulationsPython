@@ -24,6 +24,7 @@ class Metapopulation():
         carrying_capacities (List[int] | int): A list of carrying capacities (one for each subpopulation) or an integer (same carrying capacity for each subpopulation).
         number_of_features (int): Total number of cultural features per individual.
         number_of_traits (int, optional): Number of different possible traits for each cultural feature.
+        mutation_rate (float, optional): Probability of a mutation to occur.
         min_trait (int, optional): Minimum value for a trait in each feature. 
         max_trait (int, optional): Maximum value for a trait in each feature. 
     """
@@ -33,6 +34,7 @@ class Metapopulation():
                  carrying_capacities: List[int] | int = 100,
                  number_of_features: int = 5,
                  number_of_traits: int = 10,
+                 mutation_rate: float = 0.0,
                  min_trait: int = 1,
                  max_trait: int = 10
                  ):
@@ -45,6 +47,7 @@ class Metapopulation():
             carrying_capacities (List[int] | int, optional): Either a list of carrying capacities (of which the `len()` is the same as `number_of_subpopulations`) or single integer determining the same carrying capacity for all subpopulations. Defaults to 100.
             number_of_features (int, optional): Total number of cultural features per individual. Defaults to 5.
             number_of_traits (int, optional): Number of different possible traits for each cultural feature. Defaults to 10.
+            mutation_rate (float, optional): Probability of a mutation to occur. Defaults to 0.0.
             min_trait (int, optional): Minimum value for a trait in each feature. Defaults to 1.
             max_trait (int, optional): Maximum value for a trait in each feature. Deafults to 10.
         """
@@ -55,6 +58,7 @@ class Metapopulation():
         self.carrying_capacities = carrying_capacities
         self.number_of_features = number_of_features
         self.number_of_traits = number_of_traits
+        self.mutation_rate = mutation_rate
         self.min_trait = min_trait
         self.max_trait = max_trait
         
@@ -72,14 +76,14 @@ class Metapopulation():
                     for i in range(self.carrying_capacities[subpopulation.id]):
                         derived_number_of_traits = self.max_trait - self.min_trait + 1 # e.g. if smaller trait is 1 and largest is 10, there are 10 traits: 10 - 1 + 1 
                         set_of_features = np.random.randint(low = self.min_trait, high = self.max_trait + 1, size = self.number_of_features)
-                        new_individual = Individual(i, subpopulation.id, self.number_of_features, derived_number_of_traits, set_of_features)
+                        new_individual = Individual(i, subpopulation.id, self.number_of_features, derived_number_of_traits, self.mutation_rate, set_of_features)
                         subpopulation.add_individual(new_individual)
             case int():
                 for subpopulation in self.subpopulations:
                     for i in range(self.carrying_capacities):
                         derived_number_of_traits = self.max_trait - self.min_trait + 1 # e.g. if smaller trait is 1 and largest is 10, there are 10 traits: 10 - 1 + 1 
                         set_of_features = np.random.randint(low = self.min_trait, high = self.max_trait + 1, size = self.number_of_features)
-                        new_individual = Individual(i, subpopulation.id, self.number_of_features, derived_number_of_traits, set_of_features)
+                        new_individual = Individual(i, subpopulation.id, self.number_of_features, derived_number_of_traits, self.mutation_rate, set_of_features)
                         subpopulation.add_individual(new_individual)
                 
         

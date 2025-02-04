@@ -18,7 +18,7 @@ Currently, each individual's culture is represented by a set of {math}`N` featur
 
 ### Neutral model
 
-The Neutral model follows loosely the set up selected by other authors working on the spread of cultural traits (_e.g._ *Patterns in space and time: simulating cultural transmission in archaeology*, Marko Porčić). While in most works the Neutral Model assumes some sort of mutation rate in the traits, in the form of errors in the process of copying traits, we assume no copying error and instead use the simplest model where one focal individual at random in each subpopulation and each generation copies one trait at random from another individual in the same sub-population. Because of the absence of mutations, given enough time, this process is expected to lead to uniformity in an isolated subpopulation. 
+The Neutral model follows loosely the set up selected by other authors working on the spread of cultural traits (_e.g._ *Patterns in space and time: simulating cultural transmission in archaeology*, Marko Porčić). While in most works the Neutral Model assumes some sort of mutation rate in the traits, in the form of errors in the process of copying traits, we assume no copying error and instead use the simplest model where one focal individual at random in each subpopulation and each generation copies one trait at random from another individual in the same subpopulation. Because of the absence of mutations, given enough time, this process is expected to lead to uniformity in an isolated subpopulation. 
 
 ### Axelrod model
 

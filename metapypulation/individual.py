@@ -14,10 +14,11 @@ class Individual():
         original_deme_id (int): Identifier of the deme where the individual originated.
         number_of_features (int): Number of cultural features of the individual.
         number_of_traits (int): Number of traits per feature of the individual.
+        mutation_rate (float): Probability of a random mutation to occur during cultural transmission.
         features (List[int]): List of features of the individual.
         number_of_changes (int): The number of times this individual has changed set of features following an interaction.
     """
-    def __init__(self, id: int, original_deme_id: int, number_of_features: int, number_of_traits: int, features: List = None):
+    def __init__(self, id: int, original_deme_id: int, number_of_features: int, number_of_traits: int, mutation_rate: float = 0.0, features: List = None):
         """
         Create a new individual with a random set of features.
 
@@ -26,12 +27,14 @@ class Individual():
             original_deme_id (int): Identifier of the deme where the individual originated.
             number_of_features (int): Number of cultural features of the individual.
             number_of_traits (int): Number of traits per feature of the individual.
+            mutation_rate (float, optional): Probability of a random mutation to occur during cultural transmission.
             features (List, optional): Preset set of features of the individual. Default is None.
         """
         self.id = id
         self.original_deme_id = original_deme_id
         self.number_of_features = number_of_features
         self.number_of_traits = number_of_traits
+        self.mutation_rate = mutation_rate
         
         if features is None:
             # number of traits is +1 as the argument high is exclusive
@@ -43,6 +46,7 @@ class Individual():
                 raise ValueError("The input number of features does not match the input set of features!")
 
         self.number_of_changes = 0
+        self.number_of_mutations = 0
         
     
     def axelrod_interaction(self, interacting_individual: "Individual") -> None:
@@ -55,21 +59,34 @@ class Individual():
             interacting_individual (Individual): Individual with which the self individual interacts. Currently accepts only "axelrod_interaction".
         """
         probability_of_interaction = 1 - np.count_nonzero(self.features - interacting_individual.features)/self.number_of_features
-        random_number = np.random.rand()
-        if (random_number <= probability_of_interaction) and (probability_of_interaction < 1.0):
-            index = np.random.choice(np.nonzero(self.features - interacting_individual.features)[0])
-            self.features[index] = interacting_individual.features[index]
-            self.number_of_changes += 1
+        [interaction_random_number, mutation_random_number] = np.random.rand(2) # generates two random numbers
+        if (interaction_random_number <= probability_of_interaction) and (probability_of_interaction < 1.0):
+            index_to_copy = np.random.choice(np.nonzero(self.features - interacting_individual.features)[0])
+            if mutation_random_number <= self.mutation_rate:
+                # if mutation is occurring, just chose a random trait from possible traits
+                self.features[index_to_copy] = np.random.randint(low = 1, high = self.number_of_traits+1, size=1)
+                self.number_of_mutations += 1
+                self.number_of_changes += 1
+            else:
+                self.features[index_to_copy] = interacting_individual.features[index_to_copy]
+                self.number_of_changes += 1         
+
             
     def neutral_interaction(self, interacting_individual: "Individual") -> None:
         """
         Interaction following a neutral model, where replication of a trait is purely based on frequency in the population. The focal indivdual changes one 
         trait at random copying from the source individual.
         """
-        index = np.random.choice(range(0, self.number_of_features))
-        self.features[index] = interacting_individual.features[index]
-        self.number_of_changes += 1
-            
+        mutation_random_number = np.random.rand()
+        index_to_copy = np.random.choice(range(0, self.number_of_features))
+        if mutation_random_number <= self.mutation_rate:
+            self.features[index_to_copy] = np.random.randint(low = 1, high = self.number_of_trait+1, size=1)
+            self.number_of_mutations += 1
+            self.number_of_changes += 1
+        else:
+            self.features[index_to_copy] = interacting_individual.features[index_to_copy]
+            self.number_of_changes += 1
+
             
     def interact(self, interacting_individual: "Individual", interaction_function: str) -> None:
         """

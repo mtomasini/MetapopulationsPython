@@ -142,53 +142,6 @@ class Simulation():
 
             print(f"{t} generations ran in {total_time}.")
             
-            
-    # def run_replicate_with_burn_in(self, replicate_id: int) -> None:
-    #     """
-    #     Run one replicate of the simulation.
-
-    #     Args:
-    #         replicate_id (int): The number of the current replicate (for the output data columns).
-    #     """
-    #     metapopulation = Metapopulation(self.number_of_subpopulations, self.interaction_type, self.migration_matrix, self.carrying_capacities)
-    #     metapopulation.populate()
-        
-    #     set_counts = []
-    #     shannon = []
-    #     metapop_counts = []
-    #     metapop_shannon = []
-        
-    #     start_time = time.time()
-        
-    #     for t in range(self.generations + 1):
-    #         if self.verbose:
-    #             if t%self.verbose_timing == 0:
-    #                 print(f"Replicate {replicate_id}, gen {t}!")
-    #                 # TODO print other fun stuff
-                    
-    #         if t%self.measure_timing == 0:
-    #             set_counts.append(np.mean(metapopulation.traits_sets_per_subpopulation()))
-    #             shannon.append(np.mean(metapopulation.shannon_diversity_per_subpopulation()))
-    #             metapop_counts.append(metapopulation.metapopulation_test_sets())
-    #             metapop_shannon.append(metapopulation.metapopulation_shannon_diversity())
-            
-    #         if t > self.burn_in:
-    #             metapopulation.migrate()
-    
-    #         metapopulation.make_interact()
-        
-    #     self.subpop_set_counts = pd.concat([self.subpop_set_counts, pd.Series(set_counts, name=replicate_id)], axis=1)
-    #     self.subpop_shannon = pd.concat([self.subpop_shannon, pd.Series(shannon, name=replicate_id)], axis=1)
-    #     self.metapop_set_counts = pd.concat([self.metapop_set_counts, pd.Series(metapop_counts, name=replicate_id)], axis=1)
-    #     self.metapop_shannoneturn  = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
-                             
-    #     if self.verbose:
-    #         end_time = time.time()
-    #         total_time = end_time - start_time
-    #         total_time = time.strftime("%H:%M:%S", time.gmtime(total_time))
-
-    #         print(f"{t} generations ran in {total_time}.")
-           
 
     def run_simulation(self) -> None:
         """
