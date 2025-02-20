@@ -214,7 +214,32 @@ class Metapopulation():
             
         uniques = np.unique(traits, axis = 0)
         
-        return len(uniques)  
+        return len(uniques) 
+
+    def metapopulation_simpson(self) -> float:
+        """
+        Calculates Simpson diversity index over the whole metapopulation.
+
+        Returns:
+            float: Simpson diversity index of the metapopulation.
+        """
+        number_of_features = self.number_of_features
+        traits = np.zeros((self.get_metapopulation_size(), number_of_features))
+        i = 0
+        for subpopulation in self.subpopulations:
+            for individual in subpopulation.population:
+                traits[i] = (individual.features)
+                i += 1
+            
+        uniques, counts = np.unique(traits, axis = 0, return_counts = True)
+
+        simpson_denominators = []
+        for i in range(0, len(counts)):
+            simpson_denominators.append(counts[i]*(counts[i]-1))
+
+        simpson_diversity_index = self.get_metapopulation_size()*(self.get_metapopulation_size() - 1) / sum(simpson_denominators)
+        
+        return simpson_diversity_index
         
         
 class SubpopulationIterator(object):

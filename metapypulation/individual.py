@@ -80,7 +80,7 @@ class Individual():
         mutation_random_number = np.random.rand()
         index_to_copy = np.random.choice(range(0, self.number_of_features))
         if mutation_random_number <= self.mutation_rate:
-            self.features[index_to_copy] = np.random.randint(low = 1, high = self.number_of_trait+1, size=1)
+            self.features[index_to_copy] = np.random.randint(low = 1, high = self.number_of_traits+1, size=1)
             self.number_of_mutations += 1
             self.number_of_changes += 1
         else:

@@ -208,6 +208,23 @@ class Subpopulation():
         
         return shannon_index
         
+    def simpson_diversity(self) -> float:
+        """
+        Calculate the Simpson diversity index of the subpopulation.
+
+        Returns:
+            float: The Simpson diversity index of the subpopulation.
+        """
+        traits = self.return_traits_sets()    
+        uniques, counts = np.unique(traits, axis = 0, return_counts=True)
+        
+        simpson_denominators = []
+        for i in range(0, len(counts)):
+            simpson_denominators.append(counts[i]*(counts[i]-1))
+
+        simpson_diversity_index = self.get_population_size()*(self.get_population_size() - 1) / sum(simpson_denominators)
+
+        return simpson_diversity_index
       
 class IndividualsIterator(object):
     """
