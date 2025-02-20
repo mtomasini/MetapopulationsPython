@@ -38,4 +38,11 @@ where {math}`p_i` is the frequency of trait {math}`i` in the subpopulation / met
 \bar{H} = H^{\prime} .
 ```
 
-The second diversity measure that we calculate is the number of unique sets of traits. This is done through the function `np.unique(..., return_counts = True)`.
+The second diversity measure that we calculate is the number of unique sets of traits, {math}`K`. In code, this is done through the function `np.unique(..., return_counts = True)`. 
+We also implemented Simpson's diversity index, defined as 
+
+```{math}
+S = \frac{N(N-1)}{\sum_{k}n_k(n_k-1)} ,
+```
+
+where {math}`n_k` is the number of individuals with the set of traits {math}`k`. This is implemented both at the level of the subpopulation and of the metapopulation.
