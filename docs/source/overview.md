@@ -39,7 +39,7 @@ where {math}`p_i` is the frequency of trait {math}`i` in the subpopulation / met
 ```
 
 The second diversity measure that we calculate is the number of unique sets of traits, {math}`K`. In code, this is done through the function `np.unique(..., return_counts = True)`. 
-We also implemented Simpson's diversity index, defined as 
+We also implemented the (inversed) Simpson's diversity index, defined as 
 
 ```{math}
 S = \frac{N(N-1)}{\sum_{k}n_k(n_k-1)} ,
