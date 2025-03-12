@@ -177,25 +177,14 @@ class Metapopulation():
             for individual in subpopulation.population:
                 traits[i] = (individual.features)
                 i += 1
-        
-        shannons = []
-        # looping over all features, for each feature extract the frequency of each trait in the population
-        for k in range(0, number_of_features):
-            frequencies = []
-            feature_traits = traits[:, k]
-            unique, counts = np.unique(feature_traits, return_counts=True)
-            for trait_count in counts:
-                trait_frequency = trait_count / (self.get_metapopulation_size())
-                frequencies.append(trait_frequency)
             
-            frequencies = np.array(frequencies)
-            shannon_for_trait = -np.sum(frequencies*np.log(frequencies))
-            
-            shannons.append(shannon_for_trait)
+        uniques, counts = np.unique(traits, axis = 0, return_counts = True)
 
-        shannon_index = np.mean(shannons)
+        frequencies = counts / self.get_metapopulation_size()
+        shannon_diversity_index = -np.sum(frequencies*np.log(frequencies))
         
-        return shannon_index
+        return shannon_diversity_index
+        
     
     
     def metapopulation_test_sets(self) -> int:
@@ -233,11 +222,8 @@ class Metapopulation():
             
         uniques, counts = np.unique(traits, axis = 0, return_counts = True)
 
-        simpson_denominators = []
-        for i in range(0, len(counts)):
-            simpson_denominators.append(counts[i]*(counts[i]-1))
-
-        simpson_diversity_index = self.get_metapopulation_size()*(self.get_metapopulation_size() - 1) / sum(simpson_denominators)
+        frequencies = counts / self.get_metapopulation_size()
+        simpson_diversity_index = np.sum(frequencies*frequencies)
         
         return simpson_diversity_index
         

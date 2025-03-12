@@ -182,29 +182,10 @@ class Subpopulation():
         Returns:
             float: The current Shannon diversity index in the subpopulation.
         """
-        number_of_features = self.population.individuals[0].number_of_features
-        traits = np.zeros((self.get_population_size(), number_of_features))
-        i = 0
-        for individual in self.population:
-            traits[i] = (individual.features)
-            i += 1
-        
-        shannons = []
-        # looping over all features, for each feature extract the frequency of each trait in the population
-        for k in range(0, number_of_features):
-            frequencies = []
-            feature_traits = traits[:, k]
-            unique, counts = np.unique(feature_traits, return_counts=True)
-            for trait_count in counts:
-                trait_frequency = trait_count / (self.get_population_size())
-                frequencies.append(trait_frequency)
-            
-            frequencies = np.array(frequencies)
-            shannon_for_trait = -np.sum(frequencies*np.log(frequencies))
-            
-            shannons.append(shannon_for_trait)
-
-        shannon_index = np.mean(shannons)
+        traits = self.return_traits_sets()    
+        uniques, counts = np.unique(traits, axis = 0, return_counts=True)
+        frequencies = counts / self.get_population_size()
+        shannon_index = -np.sum(frequencies*np.log(frequencies))
         
         return shannon_index
         
@@ -217,13 +198,9 @@ class Subpopulation():
         """
         traits = self.return_traits_sets()    
         uniques, counts = np.unique(traits, axis = 0, return_counts=True)
+        frequencies = counts / self.get_population_size()
+        simpson_diversity_index = np.sum(frequencies*frequencies)
         
-        simpson_denominators = []
-        for i in range(0, len(counts)):
-            simpson_denominators.append(counts[i]*(counts[i]-1))
-
-        simpson_diversity_index = self.get_population_size()*(self.get_population_size() - 1) / sum(simpson_denominators)
-
         return simpson_diversity_index
       
 class IndividualsIterator(object):
