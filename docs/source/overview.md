@@ -12,7 +12,7 @@ Metapypulation has three main classes:
 
 In addition, I provide a [`Simulation`](https://mtomasini.github.io/MetapopulationsPython/metapypulation.html#module-metapypulation.simulation) class, which allows to run a simulation with several replicates, which outputs different measurements ([see below](#diversity-measures)). The class also provides some quick tools to plot the results of the simulation.
 
-## Cultural traits
+## The spread of cultural traits
 
 Currently, each individual's culture is represented by a set of {math}`N` features. Each feature in turn can assume one of {math}`\nu` traits. These features represent different (assumed) independent facets of culture: one could be language, burial tradition, boat building features, *etc*. So each individual is currently represented by a vector of integers.
 
@@ -26,23 +26,32 @@ While we plan on adding several different ways for individuals to interact and c
 
 ### Diversity measures
 
-Currently, there are two diversity measures implemented at the level of both the subpopulation and the whole metapopulation. The first is the Shannon diversity index, which for each feature is measured as
+Currently, we have implemented a few diversity measures at the level of both the subpopulation and the whole metapopulation (to avoid repeating "subpopulation / metapopulation", we refer to either as the "reference population" for the measure. 
+
+#### Count of sets
+The first measure that we implemented is the number of unique sets of traits, {math}`K`. In code, this is done through the function `np.unique(..., return_counts = True)`. 
+
+#### Shannon diversity
+The second diversity index that we have implemented is the Shannon diversity index, which measures the entropy in the reference population. For {math}`K` sets of traits,
 
 ```{math}
-H^{\prime} = - \sum_{i = 1}^{\nu} p_i \ln p_i ,
+H^{\prime} = - \sum_{i = 1}^{K} p_i \ln p_i ,
 ```
 
-where {math}`p_i` is the frequency of trait {math}`i` in the subpopulation / metapopulation. Then, the Shannon diversity index that we measure is the average of the index for each trait,
+where {math}`p_i` is the frequency of a type of individual {math}`i` in the subpopulation / metapopulation. Shannon is a measure of how "easy" it is, given an individual of type `j`, to predict the set of traits of another individual in the same reference population.
+
+#### Simpson index
+We also implemented the Simpson's diversity index, defined as 
 
 ```{math}
-\bar{H} = H^{\prime} .
+S = \sum_{i = 1}^{K} p^2_i .
 ```
 
-The second diversity measure that we calculate is the number of unique sets of traits, {math}`K`. In code, this is done through the function `np.unique(..., return_counts = True)`. 
-We also implemented the (inversed) Simpson's diversity index, defined as 
+The Simpson index is bound between 0 and 1, and represents the probability that two individuals in the same reference population have the same set of traits.
+
+#### Gini-Simpson index
+The Gini-Simpson index is simply the complement of the Simpson index, that is it measures the probability that two random indeividuals in the same reference population do not share a set of traits. This is calculated as
 
 ```{math}
-S = \frac{N(N-1)}{\sum_{k}n_k(n_k-1)} ,
+G = 1 - \sum_{i = 1}^{K} p^2_i = 1 - S
 ```
-
-where {math}`n_k` is the number of individuals with the set of traits {math}`k`. This is implemented both at the level of the subpopulation and of the metapopulation.

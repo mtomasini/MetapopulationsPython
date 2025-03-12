@@ -204,6 +204,7 @@ class Metapopulation():
         
         return len(uniques) 
 
+
     def metapopulation_simpson(self) -> float:
         """
         Calculates Simpson diversity index over the whole metapopulation.
@@ -225,6 +226,29 @@ class Metapopulation():
         simpson_diversity_index = np.sum(frequencies*frequencies)
         
         return simpson_diversity_index
+
+
+    def metapopulation_gini(self) -> float:
+        """
+        Calculates Gini-Simpson diversity index over the whole metapopulation.
+
+        Returns:
+            float: Gini-Simpson diversity index of the metapopulation.
+        """
+        number_of_features = self.number_of_features
+        traits = np.zeros((self.get_metapopulation_size(), number_of_features))
+        i = 0
+        for subpopulation in self.subpopulations:
+            for individual in subpopulation.population:
+                traits[i] = (individual.features)
+                i += 1
+            
+        uniques, counts = np.unique(traits, axis = 0, return_counts = True)
+
+        frequencies = counts / self.get_metapopulation_size()
+        gini_diversity_index = 1 - np.sum(frequencies*frequencies)
+        
+        return gini_diversity_index
 
 
     def count_origin_id_spread(self) -> np.ndarray:

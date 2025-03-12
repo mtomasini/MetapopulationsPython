@@ -205,6 +205,21 @@ class Subpopulation():
         return simpson_diversity_index
 
     
+    def gini_diversity(self) -> float:
+        """
+        Calculate the Gini-Simpson diversity index of the subpopulation. This is equal to 1 - Simpson_index
+
+        Returns:
+            float: The Gini-Simpson diversity index of the subpopulation.
+        """
+        traits = self.return_traits_sets()    
+        uniques, counts = np.unique(traits, axis = 0, return_counts=True)
+        frequencies = counts / self.get_population_size()
+        gini_diversity_index = 1 - np.sum(frequencies*frequencies)
+        
+        return gini_diversity_index
+
+    
     def count_deme_origin_id(self, total_number_of_subpopulations: int) -> List[int]:
         """
         Count how many individuals originally from each deme are found in this deme. It is generally invoked from Metapopulation to get a summary. 
