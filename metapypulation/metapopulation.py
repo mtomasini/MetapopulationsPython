@@ -186,7 +186,6 @@ class Metapopulation():
         return shannon_diversity_index
         
     
-    
     def metapopulation_test_sets(self) -> int:
         """Calculates number of unique sets of traits in the whole metapopulation.
 
@@ -226,7 +225,24 @@ class Metapopulation():
         simpson_diversity_index = np.sum(frequencies*frequencies)
         
         return simpson_diversity_index
+
+
+    def count_origin_id_spread(self) -> np.ndarray:
+        """
+        Counts the spread of individuals from deme of origin by counting how many individuals from each deme are in each deme.
+
+        Returns:
+            np.ndarray: NxN matrix where N is the number of subpopulations. Rows are local subpopulations, columns are the original deme id.
+        """
+
+        counts = []
+
+        for subpopulation in self.subpopulations:
+            local_spread = subpopulation.count_deme_origin_id(self.number_of_subpopulations)
+            counts.append(local_spread)
         
+        return np.array(counts)
+
         
 class SubpopulationIterator(object):
     """

@@ -189,6 +189,7 @@ class Subpopulation():
         
         return shannon_index
         
+    
     def simpson_diversity(self) -> float:
         """
         Calculate the Simpson diversity index of the subpopulation.
@@ -202,6 +203,24 @@ class Subpopulation():
         simpson_diversity_index = np.sum(frequencies*frequencies)
         
         return simpson_diversity_index
+
+    
+    def count_deme_origin_id(self, total_number_of_subpopulations: int) -> List[int]:
+        """
+        Count how many individuals originally from each deme are found in this deme. It is generally invoked from Metapopulation to get a summary. 
+
+        Args:
+            total_number_of_subpopulations: number of subpopulations in the whole metapopulation.
+
+        Returns:
+            List[int]: list containing a count of individuals for each subpopulation present.
+        """
+        counts = [0]*total_number_of_subpopulations
+        for individual in self.population:
+            counts[individual.original_deme_id] += 1
+
+        return counts
+
       
 class IndividualsIterator(object):
     """
