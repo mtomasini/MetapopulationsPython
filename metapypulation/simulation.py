@@ -27,7 +27,8 @@ class Simulation():
         measure_timing (int): Number of generations between measurements.
         verbose (bool): Whether to print text during the simulation.
         verbose_timing (int): Number of generations between each print statement.
-        migration_matrix (str | np.ndarray): Type of migration topology.
+        migration_matrix (str | np.ndarray): Type of migration topology ('island' or 'stepping stone'), or matrix of migrations between demes.
+        mutation_rate (float): Probability of a mutation to occur during copying.
         subpop_set_counts (pd.DataFrame): Collects the number of unique set counts per subpopulation averaged over subpopulations.
         subpop_shannon (pd.DataFrame): Collects the Shannon diversity index per subpopulation averaged over subpopulations.
         metapop_set_counts (pd.DataFrame): Collects the number of unique set counts over the whole metapopulation.
@@ -43,6 +44,7 @@ class Simulation():
                  output_path: str,
                  burn_in: int = 0,
                  migration_rate: float = 0.001,
+                 mutation_rate: float = 0.0,
                  measure_timing: int = 100,
                  verbose: bool = True,
                  verbose_timing: int = 10000):
@@ -59,6 +61,7 @@ class Simulation():
             output_path (str): Path of folder in which to save results. TODO Creates new folder if it does not exist.
             burn_in (int): Number of generations without migration in the beginning of the simulation. Defaults to 0.
             migration_rate (float): Migration rate between 0 and 1 used to generate a migration matrix when there is str input. Used only in the function `create_migration_table()`.
+            mutation_rate (float): Probability of a mutation to occur during copying. Defaults to 0.0.
             measure_timing (int, optional): Number of generations between measurements. Defaults to 100.
             verbose (bool, optional): Whether to print text during the simulation. Defaults to True.
             verbose_timing (int, optional): Number of generations between each print statement. Defaults to 10000.  
@@ -76,6 +79,8 @@ class Simulation():
         
         self.verbose = verbose
         self.verbose_timing = verbose_timing
+
+        self.mutation_rate = mutation_rate
 
         match migration_matrix:
             case str():
@@ -103,7 +108,8 @@ class Simulation():
         Args:
             replicate_id (int): The number of the current replicate (for the output data columns).
         """
-        metapopulation = Metapopulation(self.number_of_subpopulations, self.interaction_type, self.migration_matrix, self.carrying_capacities)
+        metapopulation = Metapopulation(self.number_of_subpopulations, self.interaction_type, self.migration_matrix, 
+                                        self.carrying_capacities, mutation_rate = self.mutation_rate)
         metapopulation.populate()
         
         set_counts = []
