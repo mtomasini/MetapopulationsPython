@@ -31,8 +31,12 @@ class Simulation():
         mutation_rate (float): Probability of a mutation to occur during copying.
         subpop_set_counts (pd.DataFrame): Collects the number of unique set counts per subpopulation averaged over subpopulations.
         subpop_shannon (pd.DataFrame): Collects the Shannon diversity index per subpopulation averaged over subpopulations.
+        subpop_simpson (pd.DataFrame): Collects the Simpson diversity index per subpopulation averaged over subpopulations.
+        subpop_gini (pd.DataFrame): Collects the Gini diversity index per subpopulation averaged over subpopulations.
         metapop_set_counts (pd.DataFrame): Collects the number of unique set counts over the whole metapopulation.
         metapop_shannon (pd.DataFrame): Collects the Shannon diversity index over the whole metapopulation.
+        metapop_simpson (pd.DataFrame): Collects the Simpson diversity index over the whole metapopulation.
+        metapop_gini (pd.DataFrame): Collects the Gini diversity index over the whole metapopulation.
     """
     def __init__(self, 
                  generations: int,
@@ -90,15 +94,23 @@ class Simulation():
                 
         self.subpop_set_counts = pd.DataFrame()
         self.subpop_shannon = pd.DataFrame()
+        self.subpop_simpson = pd.DataFrame()
+        self.subpop_gini = pd.DataFrame()
         self.metapop_set_counts = pd.DataFrame()
         self.metapop_shannon = pd.DataFrame()
+        self.metapop_simpson = pd.DataFrame()
+        self.metapop_gini = pd.DataFrame()
         
     
     def empty_lists(self):
         self.subpop_set_counts = pd.DataFrame()
         self.subpop_shannon = pd.DataFrame()
+        self.subpop_simpson = pd.DataFrame()
+        self.subpop_gini = pd.DataFrame()
         self.metapop_set_counts = pd.DataFrame()
         self.metapop_shannon = pd.DataFrame()
+        self.metapop_simpson = pd.DataFrame()
+        self.metapop_gini = pd.DataFrame()
 
         
     def run_single_replicate(self, replicate_id: int) -> None:
@@ -114,8 +126,12 @@ class Simulation():
         
         set_counts = []
         shannon = []
+        simpson = []
+        gini = []
         metapop_counts = []
         metapop_shannon = []
+        metapop_simpson = []
+        metapop_gini = []
         
         start_time = time.time()
         for t in range(self.generations + 1):
@@ -127,8 +143,12 @@ class Simulation():
             if t%self.measure_timing == 0:
                 set_counts.append(np.mean(metapopulation.traits_sets_per_subpopulation()))
                 shannon.append(np.mean(metapopulation.shannon_diversity_per_subpopulation()))
+                simpson.append(np.mean(metapopulation.simpson_diversity_per_subpopulation()))
+                gini.append(np.mean(metapopulation.gini_diversity_per_subpopulation()))
                 metapop_counts.append(metapopulation.metapopulation_test_sets())
                 metapop_shannon.append(metapopulation.metapopulation_shannon_diversity())
+                metapop_simpson.append(metapopulation.metapopulation_simpson_diversity())
+                metapop_gini.append(metapopulation.metapopulation_gini_diversity())
             
 
             if t > self.burn_in:
@@ -138,8 +158,12 @@ class Simulation():
         
         self.subpop_set_counts = pd.concat([self.subpop_set_counts, pd.Series(set_counts, name=replicate_id)], axis=1)
         self.subpop_shannon = pd.concat([self.subpop_shannon, pd.Series(shannon, name=replicate_id)], axis=1)
+        self.subpop_simpson = pd.concat([self.subpop_simpson, pd.Series(simpson, name=replicate_id)], axis=1)
+        self.subpop_gini = pd.concat([self.subpop_gini, pd.Series(gini, name=replicate_id)], axis=1)
         self.metapop_set_counts = pd.concat([self.metapop_set_counts, pd.Series(metapop_counts, name=replicate_id)], axis=1)
-        self.metapop_shannoneturn  = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
+        self.metapop_shannon = pd.concat([self.metapop_shannon, pd.Series(metapop_shannon, name=replicate_id)], axis=1)
+        self.metapop_simpson = pd.concat([self.metapop_simpson, pd.Series(metapop_simpson, name=replicate_id)], axis=1)
+        self.metapop_gini = pd.concat([self.metapop_gini, pd.Series(metapop_gini, name=replicate_id)], axis=1)
                              
         if self.verbose:
             end_time = time.time()
@@ -187,9 +211,13 @@ class Simulation():
         Save output to input folder.
         """
         self.subpop_set_counts.to_csv(f"{self.output_path}_subpop_set_counts.csv", sep=",")
-        #self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
+        self.subpop_shannon.to_csv(f"{self.output_path}_subpop_shannon.csv", sep=",")
+        self.subpop_simpson.to_csv(f"{self.output_path}_subpop_simpson.csv", sep=",")
+        self.subpop_gini.to_csv(f"{self.output_path}_subpop_gini.csv", sep=",")
         self.metapop_set_counts.to_csv(f"{self.output_path}_metapop_set_counts.csv", sep=",")
-        #self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")
+        self.metapop_shannon.to_csv(f"{self.output_path}_metapop_shannon.csv", sep=",")
+        self.metapop_simpson.to_csv(f"{self.output_path}_metapop_simpson.csv", sep=",")
+        self.metapop_gini.to_csv(f"{self.output_path}_metapop_gini.csv", sep=",")
         
     
     def create_migration_table(self, type_of_model, migration_rate: float) -> None:

@@ -53,5 +53,5 @@ The Simpson index is bound between 0 and 1, and represents the probability that 
 The Gini-Simpson index is simply the complement of the Simpson index, that is it measures the probability that two random indeividuals in the same reference population do not share a set of traits. This is calculated as
 
 ```{math}
-G = 1 - \sum_{i = 1}^{K} p^2_i = 1 - S
+G = 1 - \sum_{i = 1}^{K} p^2_i = 1 - S.
 ```

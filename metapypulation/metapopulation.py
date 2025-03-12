@@ -147,6 +147,34 @@ class Metapopulation():
             subpopulation_shannons.append(subpopulation.shannon_diversity())
             
         return subpopulation_shannons
+
+
+    def simpson_diversity_per_subpopulation(self) -> List[float]:
+        """
+        Calculates Simpson diversity index in each subpopulation.
+
+        Returns:
+            List[float]: list with the Simpson diversity index per subpopulation.
+        """
+        subpopulation_simpsons = []
+        for subpopulation in self.subpopulations:
+            subpopulation_simpsons.append(subpopulation.simpson_diversity())
+            
+        return subpopulation_simpsons
+
+
+    def gini_diversity_per_subpopulation(self) -> List[float]:
+        """
+        Calculates Gini diversity index in each subpopulation.
+
+        Returns:
+            List[float]: list with the Gini diversity index per subpopulation.
+        """
+        subpopulation_ginis = []
+        for subpopulation in self.subpopulations:
+            subpopulation_ginis.append(subpopulation.gini_diversity())
+            
+        return subpopulation_ginis
     
     
     def traits_sets_per_subpopulation(self) -> List[int]:
@@ -205,7 +233,7 @@ class Metapopulation():
         return len(uniques) 
 
 
-    def metapopulation_simpson(self) -> float:
+    def metapopulation_simpson_diversity(self) -> float:
         """
         Calculates Simpson diversity index over the whole metapopulation.
 
@@ -228,7 +256,7 @@ class Metapopulation():
         return simpson_diversity_index
 
 
-    def metapopulation_gini(self) -> float:
+    def metapopulation_gini_diversity(self) -> float:
         """
         Calculates Gini-Simpson diversity index over the whole metapopulation.
 
