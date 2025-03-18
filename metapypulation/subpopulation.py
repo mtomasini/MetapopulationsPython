@@ -122,7 +122,7 @@ class Subpopulation():
         focus_individual.interact(interacting_individual, self.type_of_interaction)
     
 
-    def return_traits_sets(self) -> np.ndarray:
+    def get_traits_sets(self) -> np.ndarray:
         """
         This function returns all the feature sets found in a subpopulation in an array.
 
@@ -147,7 +147,7 @@ class Subpopulation():
         Returns:
             int: The current number of different sets of traits in the subpopulation.
         """
-        traits = self.return_traits_sets()    
+        traits = self.get_traits_sets()    
         
         uniques = np.unique(traits, axis = 0)
         
@@ -164,7 +164,7 @@ class Subpopulation():
         Returns:
             bool: True if the trait is found in the subpopulation.
         """ 
-        traits = self.return_traits_sets()
+        traits = self.get_traits_sets()
 
         if feature is None:
             feature_is_found = (trait in traits)
@@ -182,7 +182,7 @@ class Subpopulation():
         Returns:
             float: The current Shannon diversity index in the subpopulation.
         """
-        traits = self.return_traits_sets()    
+        traits = self.get_traits_sets()    
         uniques, counts = np.unique(traits, axis = 0, return_counts=True)
         frequencies = counts / self.get_population_size()
         shannon_index = -np.sum(frequencies*np.log(frequencies))
@@ -197,7 +197,7 @@ class Subpopulation():
         Returns:
             float: The Simpson diversity index of the subpopulation.
         """
-        traits = self.return_traits_sets()    
+        traits = self.get_traits_sets()    
         uniques, counts = np.unique(traits, axis = 0, return_counts=True)
         frequencies = counts / self.get_population_size()
         simpson_diversity_index = np.sum(frequencies*frequencies)
@@ -212,7 +212,7 @@ class Subpopulation():
         Returns:
             float: The Gini-Simpson diversity index of the subpopulation.
         """
-        traits = self.return_traits_sets()    
+        traits = self.get_traits_sets()    
         uniques, counts = np.unique(traits, axis = 0, return_counts=True)
         frequencies = counts / self.get_population_size()
         gini_diversity_index = 1 - np.sum(frequencies*frequencies)

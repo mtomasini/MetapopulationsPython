@@ -97,3 +97,37 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
     plt.title(title)
 
     plt.savefig(output_file)
+
+
+def plot_comparison_gini_pulses(dataset_1, dataset_2, title, legend_1, legend_2, number_of_pulses, length_of_pulses, settling_period, output_file, dataset_3=None, legend_3=None):
+    dataset_1_local = pd.read_csv(f"{dataset_1}_subpop_gini.csv", index_col=0)
+    dataset_2_local = pd.read_csv(f"{dataset_2}_subpop_gini.csv", index_col=0)
+
+
+    line1, = plt.plot(dataset_1_local.mean(axis=1), color = 'xkcd:sky blue', label=f"{legend_1} subpop avg")
+    line2, = plt.plot(dataset_2_local.mean(axis=1), color = 'tan', label=f"{legend_2} subpop avg")
+    plt.fill_between(dataset_1_local.index, dataset_1_local.mean(axis=1) - dataset_1_local.std(axis=1), dataset_1_local.mean(axis=1) + dataset_1_local.std(axis=1), color='xkcd:sky blue', alpha=0.3)
+    plt.fill_between(dataset_2_local.index, dataset_2_local.mean(axis=1) - dataset_2_local.std(axis=1), dataset_2_local.mean(axis=1) + dataset_2_local.std(axis=1), color='tan', alpha=0.3)
+    
+    if dataset_3 is not None:
+        dataset_3_local = pd.read_csv(f"{dataset_3}_subpop_gini.csv", index_col=0)
+        line3, = plt.plot(dataset_3_local.mean(axis=1), color = 'mediumpurple', label=f"{legend_3} subpop avg")
+        plt.fill_between(dataset_3_local.index, dataset_3_local.mean(axis=1) - dataset_3_local.std(axis=1), dataset_3_local.mean(axis=1) + dataset_3_local.std(axis=1), color='mediumpurple', alpha=0.3)
+        #plt.legend([f"{legend_1} subpop avg", f"{legend_2} subpop avg", f"{legend_3} subpop avg"])
+        plt.legend(loc=3, handles=[line1, line2, line3])
+    
+    else:    
+        plt.legend([f"{legend_1} subpop avg", f"{legend_2} subpop avg"])
+
+
+    plt.axvline(500, color="black", linestyle='--', ymax=1)
+    for i in range(1, number_of_pulses + 1):
+        plt.axvline(500 + i*(length_of_pulses + settling_period), color="dimgrey", linestyle='--', ymax=1)
+
+
+    plt.ylabel("Gini-Simpson diversity index")
+    plt.xlabel("Generations (x100)")
+    plt.grid(linestyle=':', linewidth=0.5)
+    plt.title(title)
+
+    plt.savefig(output_file)
