@@ -55,3 +55,11 @@ The Gini-Simpson index is simply the complement of the Simpson index, that is it
 ```{math}
 G = 1 - \sum_{i = 1}^{K} p^2_i = 1 - S.
 ```
+
+#### {math}`\beta`-diversity
+{math}`\beta`-diversity is a ratio between diersity over the whole metapopulation and the diversity per subpopulation. We implemented the diversity index suggested by Whittaker (1960; see also Wilson and Shmida, 1984):
+
+```{math}
+\beta_W = \frac{K_m}{\bar{K}_s} - 1
+```
+where {math}`K_m` is the number of sets of traits in the whole metapopulation, and {math}`\bar{K}_s` is the average number of sets of traits in each subpopulation.

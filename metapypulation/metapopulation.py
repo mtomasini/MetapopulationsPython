@@ -214,7 +214,7 @@ class Metapopulation():
         return shannon_diversity_index
         
     
-    def metapopulation_test_sets(self) -> int:
+    def metapopulation_count_sets(self) -> int:
         """Calculates number of unique sets of traits in the whole metapopulation.
 
         Returns:
@@ -277,6 +277,23 @@ class Metapopulation():
         gini_diversity_index = 1 - np.sum(frequencies*frequencies)
         
         return gini_diversity_index
+
+    
+    def whittaker_beta_diversity(self) -> float:
+        """
+        Calculate beta diversity as described by Whittaker (1960).
+
+        Returns:
+            float: Whittaker beta diversity.
+        """
+        metapopulation_sets_number = self.metapopulation_count_sets()
+        subpopulation_set_counts = []
+        for subpopulation in self.subpopulations:
+            subpopulation_set_counts.append(subpopulation.count_traits_sets())
+
+        beta_diversity = metapopulation_sets_number / np.mean(subpopulation_set_counts) - 1
+
+        return beta_diversity
 
 
     def count_origin_id_spread(self) -> np.ndarray:

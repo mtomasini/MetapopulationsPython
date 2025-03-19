@@ -145,7 +145,7 @@ class Simulation():
                 shannon.append(np.mean(metapopulation.shannon_diversity_per_subpopulation()))
                 simpson.append(np.mean(metapopulation.simpson_diversity_per_subpopulation()))
                 gini.append(np.mean(metapopulation.gini_diversity_per_subpopulation()))
-                metapop_counts.append(metapopulation.metapopulation_test_sets())
+                metapop_counts.append(metapopulation.metapopulation_count_sets())
                 metapop_shannon.append(metapopulation.metapopulation_shannon_diversity())
                 metapop_simpson.append(metapopulation.metapopulation_simpson_diversity())
                 metapop_gini.append(metapopulation.metapopulation_gini_diversity())

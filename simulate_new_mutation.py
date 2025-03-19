@@ -65,7 +65,7 @@ for i in range(1, replicates + 1):
             counts_pop_6.append(metapop.subpopulations[5].count_traits_sets())
             counts_pop_7.append(metapop.subpopulations[6].count_traits_sets())
             counts_pop_8.append(metapop.subpopulations[7].count_traits_sets())
-            counts_metapop.append(metapop.metapopulation_test_sets())
+            counts_metapop.append(metapop.metapopulation_count_sets())
             subpops_with_mutation.append(0)
         # if t%50000 == 0:
         #     print(f"Gen {t}!")
@@ -86,7 +86,7 @@ for i in range(1, replicates + 1):
             counts_pop_6.append(metapop.subpopulations[5].count_traits_sets())
             counts_pop_7.append(metapop.subpopulations[6].count_traits_sets())
             counts_pop_8.append(metapop.subpopulations[7].count_traits_sets())
-            counts_metapop.append(metapop.metapopulation_test_sets())
+            counts_metapop.append(metapop.metapopulation_count_sets())
             subpops_with_mutation.append(0)
         # if t%50000 == 0:
         #     print(f"Gen {t}!")
@@ -119,7 +119,7 @@ for i in range(1, replicates + 1):
             counts_pop_6.append(metapop.subpopulations[5].count_traits_sets())
             counts_pop_7.append(metapop.subpopulations[6].count_traits_sets())
             counts_pop_8.append(metapop.subpopulations[7].count_traits_sets())
-            counts_metapop.append(metapop.metapopulation_test_sets())
+            counts_metapop.append(metapop.metapopulation_count_sets())
         
             feature_tests = []
             for subpop in metapop.subpopulations:

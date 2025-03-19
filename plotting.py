@@ -55,7 +55,7 @@ def plot_comparison_gini(dataset_1, dataset_2, title, legend_1, legend_2, output
     plt.savefig(output_file)
 
 
-def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend_2, output_file, what_measure, dataset_3 = None, legend_3 = None):
+def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend_2, output_file, what_measure, number_of_pulses = 5, length_of_pulses = 1, settling_period = 99,  dataset_3 = None, legend_3 = None):
     if what_measure == 'set_counts':
         dataset_1_global = pd.read_csv(f"{dataset_1}_metapop_set_counts.csv", index_col=0)
         dataset_2_global = pd.read_csv(f"{dataset_2}_metapop_set_counts.csv", index_col=0)
@@ -68,11 +68,14 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
     elif what_measure == 'gini':
         dataset_1_global = pd.read_csv(f"{dataset_1}_metapop_gini.csv", index_col=0)
         dataset_2_global = pd.read_csv(f"{dataset_2}_metapop_gini.csv", index_col=0)
+    elif what_measure == 'beta':
+        dataset_1_global = pd.read_csv(f"{dataset_1}_beta_diversity.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_beta_diversity.csv", index_col=0)
     else:
         print("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
     
-    plt.plot(dataset_1_global.mean(axis=1), color = 'xkcd:blue')
-    plt.plot(dataset_2_global.mean(axis=1), color = 'xkcd:puce')
+    line1, = plt.plot(dataset_1_global.mean(axis=1), color = 'xkcd:blue', label=f"{legend_1}")
+    line2, = plt.plot(dataset_2_global.mean(axis=1), color = 'xkcd:puce', label=f"{legend_2}")
     
     plt.fill_between(dataset_1_global.index, dataset_1_global.mean(axis=1) - dataset_1_global.std(axis=1), dataset_1_global.mean(axis=1) + dataset_1_global.std(axis=1), color='xkcd:blue', alpha=0.3)
     plt.fill_between(dataset_2_global.index, dataset_2_global.mean(axis=1) - dataset_2_global.std(axis=1), dataset_2_global.mean(axis=1) + dataset_2_global.std(axis=1), color='xkcd:puce', alpha=0.3)
@@ -80,18 +83,32 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
     plt.axvline(500, color="black", linestyle='--', ymax=1)
 
     if dataset_3 is not None:
-        # TODO FIX HERE
-        dataset_3_global = pd.read_csv(f"{dataset_3}_metapop_set_counts.csv", index_col=0)
-        plt.plot(dataset_3_global.mean(axis=1), color = 'xkcd:light purple')
+        if what_measure == 'set_counts':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_metapop_set_counts.csv", index_col=0)
+        elif what_measure == 'shannon':
+            dataset_3_global == pd.read_csv(f"{dataset_3}_metapop_shannon.csv", index_col=0)
+        elif what_measure == 'simpson':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_metapop_simpson.csv", index_col=0)
+        elif what_measure == 'gini':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_metapop_gini.csv", index_col=0)
+        elif what_measure == 'beta':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_beta_diversity.csv", index_col=0)
+        else:
+            print("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
+
+        line3, = plt.plot(dataset_3_global.mean(axis=1), color = 'xkcd:light purple', label=f"{legend_3}")
         plt.fill_between(dataset_3_global.index, dataset_3_global.mean(axis=1) - dataset_3_global.std(axis=1), dataset_3_global.mean(axis=1) + dataset_3_global.std(axis=1), color='xkcd:light purple', alpha=0.3)
 
-
     if dataset_3 is not None:
-        plt.legend([f"{legend_1}", f"{legend_2}", f"{legend_3}"])
+        plt.legend(loc=3, handles=[line1, line2, line3])
     else:
         plt.legend([f"{legend_1}", f"{legend_2}"])
 
-    plt.ylabel("Number of feature sets")
+    plt.axvline(500, color="black", linestyle='--', ymax=1)
+    for i in range(1, number_of_pulses + 1):
+        plt.axvline(500 + i*(length_of_pulses + settling_period), color="dimgrey", linestyle='--', ymax=1)
+
+    plt.ylabel(r"Whittaker $\beta$ Diversity")
     plt.xlabel("Generations (x100)")
     plt.grid(linestyle=':', linewidth=0.5)
     plt.title(title)

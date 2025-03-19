@@ -10,7 +10,7 @@ verbose_timing = 10000
 measure_timing = 100
 
 total_population = 800
-replicates = 10
+replicates = 50
 save_output = True
 interactions = ['neutral_interaction'] # 'axelrod_interaction'
 number_of_subpopulations = 8
@@ -26,7 +26,7 @@ start_time = time.time()
 
 count = 0
 
-title = "singleConnection"
+title = "frontConnection"
 migration_config = np.genfromtxt(f"./configs/maritime_configs/{title}.csv", delimiter=",")
 
 for interaction in interactions:
@@ -36,6 +36,7 @@ for interaction in interactions:
         subpop_gini_df = pd.DataFrame()
         metapop_set_counts_df = pd.DataFrame()
         metapop_gini_df = pd.DataFrame()
+        beta_diversity_df = pd.DataFrame()
 
         carrying_capacity = int(np.ceil(total_population / number_of_subpopulations)) # [283, 39, 39, 39]# 
         
@@ -53,6 +54,7 @@ for interaction in interactions:
             gini = []
             metapop_counts = []
             metapop_gini = []
+            beta_diversity = []
 
             t = 0
             for gen in range(burn_in):
@@ -67,8 +69,9 @@ for interaction in interactions:
                 if t%measure_timing == 0:
                     set_counts.append(np.mean(metapopulation.traits_sets_per_subpopulation()))
                     gini.append(np.mean(metapopulation.gini_diversity_per_subpopulation()))
-                    metapop_counts.append(metapopulation.metapopulation_test_sets())
+                    metapop_counts.append(metapopulation.metapopulation_count_sets())
                     metapop_gini.append(metapopulation.metapopulation_gini_diversity())
+                    beta_diversity.append(metapopulation.whittaker_beta_diversity())
                         
                 t += 1
             
@@ -95,8 +98,9 @@ for interaction in interactions:
                     if t%measure_timing == 0:
                         set_counts.append(np.mean(metapopulation.traits_sets_per_subpopulation()))
                         gini.append(np.mean(metapopulation.gini_diversity_per_subpopulation()))
-                        metapop_counts.append(metapopulation.metapopulation_test_sets())
+                        metapop_counts.append(metapopulation.metapopulation_count_sets())
                         metapop_gini.append(metapopulation.metapopulation_gini_diversity())
+                        beta_diversity.append(metapopulation.whittaker_beta_diversity())
 
                     t += 1
             
@@ -104,6 +108,7 @@ for interaction in interactions:
             subpop_gini_df = pd.concat([subpop_gini_df, pd.Series(gini, name=replicate_id)], axis=1)
             metapop_set_counts_df = pd.concat([metapop_set_counts_df, pd.Series(metapop_counts, name=replicate_id)], axis=1)
             metapop_gini_df = pd.concat([metapop_gini_df, pd.Series(metapop_gini, name=replicate_id)], axis=1)
+            beta_diversity_df = pd.concat([beta_diversity_df, pd.Series(beta_diversity, name=replicate_id)], axis=1)
                                 
             if verbose:
                 print(f"Generation reached: {t}")
@@ -116,10 +121,11 @@ for interaction in interactions:
             # print(metapopulation.count_origin_id_spread())
 
         if save_output:
-            subpop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_set_counts.csv", sep=",")
-            subpop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_gini.csv", sep=",")
-            metapop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_set_counts.csv", sep=",")
-            metapop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_gini.csv", sep=",")
+            # subpop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_set_counts.csv", sep=",")
+            # subpop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_gini.csv", sep=",")
+            # metapop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_set_counts.csv", sep=",")
+            # metapop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_gini.csv", sep=",")
+            beta_diversity_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_beta_diversity.csv", sep=",")
 
         # subpop_gini_df.to_csv("test.csv")
                                     
