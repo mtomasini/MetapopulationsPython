@@ -10,15 +10,15 @@ verbose_timing = 10000
 measure_timing = 100
 
 total_population = 800
-replicates = 1
+replicates = 50
 save_output = True
-interactions = ['neutral_interaction'] # 'axelrod_interaction'
+interactions = ['axelrod_interaction'] # 'axelrod_interaction'
 number_of_subpopulations = 8
 migration_rates = [0.0001]
 mutation_rates = 0.0005
 
 burn_in = 50000
-pulse_length = 0
+pulse_length = 100
 number_of_pulses = 5
 settling_period = 10000 - pulse_length # 10000
 
@@ -26,7 +26,7 @@ start_time = time.time()
 
 count = 0
 
-title = "frontConnection"
+title = "singleConnection"
 migration_config = np.genfromtxt(f"./configs/maritime_configs/{title}.csv", delimiter=",")
 
 for interaction in interactions:
@@ -104,7 +104,10 @@ for interaction in interactions:
 
                     t += 1
             
-            extra_traits_counts_df = pd.concat([extra_traits_counts_df, pd.Series(extra_traits_in_metapopulation, name=replicate_id)], axis=1)
+            current_df = pd.DataFrame(extra_traits_in_metapopulation)
+            current_df['Replicate'] = replicate_id
+            extra_traits_counts_df = pd.concat([extra_traits_counts_df, current_df])
+            
                                 
             if verbose:
                 print(f"Generation reached: {t}")
