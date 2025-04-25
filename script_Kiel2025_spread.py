@@ -12,13 +12,13 @@ measure_timing = 100
 total_population = 800
 replicates = 50
 save_output = True
-interactions = ['axelrod_interaction'] # 'axelrod_interaction'
+interactions = ['neutral_interaction'] # 'axelrod_interaction'
 number_of_subpopulations = 8
 migration_rates = [0.0001]
 mutation_rates = 0.0005
 
 burn_in = 50000
-pulse_length = 100
+pulse_length = 1000
 number_of_pulses = 5
 settling_period = 10000 - pulse_length # 10000
 
@@ -26,7 +26,7 @@ start_time = time.time()
 
 count = 0
 
-title = "singleConnection"
+title = "frontConnection"
 migration_config = np.genfromtxt(f"./configs/maritime_configs/{title}.csv", delimiter=",")
 
 for interaction in interactions:

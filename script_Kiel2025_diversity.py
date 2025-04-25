@@ -18,7 +18,7 @@ migration_rates = [0.0001]
 mutation_rates = 0.0005
 
 burn_in = 50000
-pulse_length = 100
+pulse_length = 0
 number_of_pulses = 5
 settling_period = 10000 - pulse_length # 10000
 
@@ -121,13 +121,12 @@ for interaction in interactions:
             # print(metapopulation.count_origin_id_spread())
 
         if save_output:
-            # subpop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_set_counts.csv", sep=",")
-            # subpop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_gini.csv", sep=",")
-            # metapop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_set_counts.csv", sep=",")
-            # metapop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_gini.csv", sep=",")
+            subpop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_set_counts.csv", sep=",")
+            subpop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_subpop_gini.csv", sep=",")
+            metapop_set_counts_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_set_counts.csv", sep=",")
+            metapop_gini_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_metapop_gini.csv", sep=",")
             beta_diversity_df.to_csv(f"./Outputs/Kiel2025/{title}/{interaction}_{rate_of_migration}_{number_of_pulses}pulses_{pulse_length}gen_beta_diversity.csv", sep=",")
 
-        # subpop_gini_df.to_csv("test.csv")
                                     
 end_time = time.time() - start_time
 hours = round(end_time//3600)

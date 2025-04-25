@@ -72,13 +72,17 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
         dataset_1_global = pd.read_csv(f"{dataset_1}_beta_diversity.csv", index_col=0)
         dataset_2_global = pd.read_csv(f"{dataset_2}_beta_diversity.csv", index_col=0)
     else:
-        print("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
+        raise ValueError("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
     
-    line1, = plt.plot(dataset_1_global.mean(axis=1), color = 'xkcd:blue', label=f"{legend_1}")
-    line2, = plt.plot(dataset_2_global.mean(axis=1), color = 'xkcd:puce', label=f"{legend_2}")
+    color1 = "xkcd:medium blue"
+    color2 = "xkcd:violet"
+    color3 = "xkcd:dark orange"
+
+    line1, = plt.plot(dataset_1_global.mean(axis=1), color = color1, label=f"{legend_1}")
+    line2, = plt.plot(dataset_2_global.mean(axis=1), color = color2, label=f"{legend_2}")
     
-    plt.fill_between(dataset_1_global.index, dataset_1_global.mean(axis=1) - dataset_1_global.std(axis=1), dataset_1_global.mean(axis=1) + dataset_1_global.std(axis=1), color='xkcd:blue', alpha=0.3)
-    plt.fill_between(dataset_2_global.index, dataset_2_global.mean(axis=1) - dataset_2_global.std(axis=1), dataset_2_global.mean(axis=1) + dataset_2_global.std(axis=1), color='xkcd:puce', alpha=0.3)
+    plt.fill_between(dataset_1_global.index, dataset_1_global.mean(axis=1) - dataset_1_global.std(axis=1), dataset_1_global.mean(axis=1) + dataset_1_global.std(axis=1), color=color1, alpha=0.2)
+    plt.fill_between(dataset_2_global.index, dataset_2_global.mean(axis=1) - dataset_2_global.std(axis=1), dataset_2_global.mean(axis=1) + dataset_2_global.std(axis=1), color=color2, alpha=0.2)
     
     plt.axvline(500, color="black", linestyle='--', ymax=1)
 
@@ -96,8 +100,8 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
         else:
             print("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
 
-        line3, = plt.plot(dataset_3_global.mean(axis=1), color = 'xkcd:light purple', label=f"{legend_3}")
-        plt.fill_between(dataset_3_global.index, dataset_3_global.mean(axis=1) - dataset_3_global.std(axis=1), dataset_3_global.mean(axis=1) + dataset_3_global.std(axis=1), color='xkcd:light purple', alpha=0.3)
+        line3, = plt.plot(dataset_3_global.mean(axis=1), color = color3, label=f"{legend_3}")
+        plt.fill_between(dataset_3_global.index, dataset_3_global.mean(axis=1) - dataset_3_global.std(axis=1), dataset_3_global.mean(axis=1) + dataset_3_global.std(axis=1), color=color3, alpha=0.2)
 
     if dataset_3 is not None:
         plt.legend(loc=3, handles=[line1, line2, line3])
@@ -107,9 +111,88 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
     plt.axvline(500, color="black", linestyle='--', ymax=1)
     for i in range(1, number_of_pulses + 1):
         plt.axvline(500 + i*(length_of_pulses + settling_period), color="dimgrey", linestyle='--', ymax=1)
+    
+    match what_measure:
+        case 'set_counts':
+            plt.ylabel("Number of sets of features")
+        case 'shannon':
+            plt.ylabel("Shannon diversity")
+        case 'simpson':
+            plt.ylabel("Simpson diversity")
+        case 'gini':
+            plt.ylabel(r"Gini-Simpson diversity")
+        case 'beta':
+            plt.ylabel(r"Whittaker $\beta$-diversity")
+    plt.xlabel("Steps (x100)")
+    plt.grid(linestyle=':', linewidth=0.5)
+    plt.title(title)
 
-    plt.ylabel(r"Whittaker $\beta$ Diversity")
-    plt.xlabel("Generations (x100)")
+    plt.savefig(output_file)
+
+
+def subpopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend_2, output_file, what_measure, number_of_pulses = 5, length_of_pulses = 1, settling_period = 99,  dataset_3 = None, legend_3 = None):
+    if what_measure == 'set_counts':
+        dataset_1_global = pd.read_csv(f"{dataset_1}_subpop_set_counts.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_subpop_set_counts.csv", index_col=0)
+    elif what_measure == 'shannon':
+        dataset_1_global == pd.read_csv(f"{dataset_1}_subpop_shannon.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_subpop_shannon.csv", index_col=0)
+    elif what_measure == 'simpson':
+        dataset_1_global = pd.read_csv(f"{dataset_1}_subpop_simpson.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_subpop_simpson.csv", index_col=0)
+    elif what_measure == 'gini':
+        dataset_1_global = pd.read_csv(f"{dataset_1}_subpop_gini.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_subpop_gini.csv", index_col=0)
+    else:
+        raise ValueError("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
+    
+    color1 = "xkcd:medium blue"
+    color2 = "xkcd:violet"
+    color3 = "xkcd:dark orange"
+
+    line1, = plt.plot(dataset_1_global.mean(axis=1), color = color1, label=f"{legend_1}")
+    line2, = plt.plot(dataset_2_global.mean(axis=1), color = color2, label=f"{legend_2}")
+    
+    plt.fill_between(dataset_1_global.index, dataset_1_global.mean(axis=1) - dataset_1_global.std(axis=1), dataset_1_global.mean(axis=1) + dataset_1_global.std(axis=1), color=color1, alpha=0.2)
+    plt.fill_between(dataset_2_global.index, dataset_2_global.mean(axis=1) - dataset_2_global.std(axis=1), dataset_2_global.mean(axis=1) + dataset_2_global.std(axis=1), color=color2, alpha=0.2)
+    
+    plt.axvline(500, color="black", linestyle='--', ymax=1)
+
+    if dataset_3 is not None:
+        if what_measure == 'set_counts':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_subpop_set_counts.csv", index_col=0)
+        elif what_measure == 'shannon':
+            dataset_3_global == pd.read_csv(f"{dataset_3}_subpop_shannon.csv", index_col=0)
+        elif what_measure == 'simpson':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_subpop_simpson.csv", index_col=0)
+        elif what_measure == 'gini':
+            dataset_3_global = pd.read_csv(f"{dataset_3}_subpop_gini.csv", index_col=0)
+        else:
+            print("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
+
+        line3, = plt.plot(dataset_3_global.mean(axis=1), color = color3, label=f"{legend_3}")
+        plt.fill_between(dataset_3_global.index, dataset_3_global.mean(axis=1) - dataset_3_global.std(axis=1), dataset_3_global.mean(axis=1) + dataset_3_global.std(axis=1), color=color3, alpha=0.2)
+
+    if dataset_3 is not None:
+        plt.legend(loc=3, handles=[line1, line2, line3])
+    else:
+        plt.legend([f"{legend_1}", f"{legend_2}"])
+
+    plt.axvline(500, color="black", linestyle='--', ymax=1)
+    for i in range(1, number_of_pulses + 1):
+        plt.axvline(500 + i*(length_of_pulses + settling_period), color="dimgrey", linestyle='--', ymax=1)
+    
+    match what_measure:
+        case 'set_counts':
+            plt.ylabel("Number of sets of features")
+        case 'shannon':
+            plt.ylabel("Shannon diversity")
+        case 'simpson':
+            plt.ylabel("Simpson diversity")
+        case 'gini':
+            plt.ylabel("Gini-Simpson diversity")
+    # plt.ylim([0, 100])
+    plt.xlabel("Steps (x100)")
     plt.grid(linestyle=':', linewidth=0.5)
     plt.title(title)
 
