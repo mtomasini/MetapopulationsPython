@@ -1,0 +1,1183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metapypulation package &mdash; MetaPypulation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About the author" href="author.html" />
+    <link rel="prev" title="metapypulation" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MetaPypulation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Metapypulation: an overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">metapypulation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">metapypulation package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-metapypulation.individual">metapypulation.individual module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.individual.Individual"><code class="docutils literal notranslate"><span class="pre">Individual</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-metapypulation.metapopulation">metapypulation.metapopulation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.metapopulation.Metapopulation"><code class="docutils literal notranslate"><span class="pre">Metapopulation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.metapopulation.SetOfSubpopulations"><code class="docutils literal notranslate"><span class="pre">SetOfSubpopulations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.metapopulation.SubpopulationIterator"><code class="docutils literal notranslate"><span class="pre">SubpopulationIterator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-metapypulation.subpopulation">metapypulation.subpopulation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.subpopulation.IndividualsIterator"><code class="docutils literal notranslate"><span class="pre">IndividualsIterator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.subpopulation.SetOfIndividuals"><code class="docutils literal notranslate"><span class="pre">SetOfIndividuals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.subpopulation.Subpopulation"><code class="docutils literal notranslate"><span class="pre">Subpopulation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-metapypulation.simulation">metapypulation.simulation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metapypulation.simulation.Simulation"><code class="docutils literal notranslate"><span class="pre">Simulation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-metapypulation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="author.html">About the author</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MetaPypulation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">metapypulation</a></li>
+      <li class="breadcrumb-item active">metapypulation package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/metapypulation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metapypulation-package">
+<h1>metapypulation package<a class="headerlink" href="#metapypulation-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-metapypulation.individual">
+<span id="metapypulation-individual-module"></span><h2>metapypulation.individual module<a class="headerlink" href="#module-metapypulation.individual" title="Link to this heading"></a></h2>
+<p>A module containing the individual class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.individual.</span></span><span class="sig-name descname"><span class="pre">Individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_deme_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_traits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.individual.Individual" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for an individual in the metapopulation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#metapypulation.individual.Individual.id" title="Link to this definition"></a></dt>
+<dd><p>The identifier for the individual (unique within the subpopulation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.original_deme_id">
+<span class="sig-name descname"><span class="pre">original_deme_id</span></span><a class="headerlink" href="#metapypulation.individual.Individual.original_deme_id" title="Link to this definition"></a></dt>
+<dd><p>Identifier of the deme where the individual originated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.number_of_features">
+<span class="sig-name descname"><span class="pre">number_of_features</span></span><a class="headerlink" href="#metapypulation.individual.Individual.number_of_features" title="Link to this definition"></a></dt>
+<dd><p>Number of cultural features of the individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.number_of_traits">
+<span class="sig-name descname"><span class="pre">number_of_traits</span></span><a class="headerlink" href="#metapypulation.individual.Individual.number_of_traits" title="Link to this definition"></a></dt>
+<dd><p>Number of traits per feature of the individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.mutation_rate">
+<span class="sig-name descname"><span class="pre">mutation_rate</span></span><a class="headerlink" href="#metapypulation.individual.Individual.mutation_rate" title="Link to this definition"></a></dt>
+<dd><p>Probability of a random mutation to occur during cultural transmission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.features">
+<span class="sig-name descname"><span class="pre">features</span></span><a class="headerlink" href="#metapypulation.individual.Individual.features" title="Link to this definition"></a></dt>
+<dd><p>List of features of the individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.number_of_changes">
+<span class="sig-name descname"><span class="pre">number_of_changes</span></span><a class="headerlink" href="#metapypulation.individual.Individual.number_of_changes" title="Link to this definition"></a></dt>
+<dd><p>The number of times this individual has changed set of features following an interaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.axelrod_interaction">
+<span class="sig-name descname"><span class="pre">axelrod_interaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interacting_individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.individual.Individual.axelrod_interaction" title="Link to this definition"></a></dt>
+<dd><p>Interaction following the Axelrod model of culture dissemination. A random individual (source) is selected. The probability of interacting is given
+by the number of traits in common between the focal individual (self) and the source divided by the total number of features. If they interact,
+the focal individual copies one of the features of the source for which they are not equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interacting_individual</strong> (<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><em>Individual</em></a>) – Individual with which the self individual interacts. Currently accepts only “axelrod_interaction”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.interact">
+<span class="sig-name descname"><span class="pre">interact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interacting_individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.individual.Individual.interact" title="Link to this definition"></a></dt>
+<dd><p>Wrapper for interactions, it allows to pass any interaction that is coded for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interaction_function</strong> (<em>str</em>) – The type of interaction that decides the outcome of the interaction. Current options are “neutral_interaction” and “axelrod_interaction”.</p></li>
+<li><p><strong>interacting_individual</strong> (<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><em>Individual</em></a>) – Individual with which the self individual interacts.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.individual.Individual.neutral_interaction">
+<span class="sig-name descname"><span class="pre">neutral_interaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interacting_individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.individual.Individual.neutral_interaction" title="Link to this definition"></a></dt>
+<dd><p>Interaction following a neutral model, where replication of a trait is purely based on frequency in the population. The focal indivdual changes one
+trait at random copying from the source individual.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-metapypulation.metapopulation">
+<span id="metapypulation-metapopulation-module"></span><h2>metapypulation.metapopulation module<a class="headerlink" href="#module-metapypulation.metapopulation" title="Link to this heading"></a></h2>
+<p>A module containing the class Metapopulation, which determines the topology of the metapopulation
+as well as the migration rates between populations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.metapopulation.</span></span><span class="sig-name descname"><span class="pre">Metapopulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_subpopulations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_of_interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migration_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carrying_capacities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_traits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_trait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_trait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for a metapopulation containing subpopulations.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.number_of_subpopulations">
+<span class="sig-name descname"><span class="pre">number_of_subpopulations</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.number_of_subpopulations" title="Link to this definition"></a></dt>
+<dd><p>how many subpopulations compose the metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.subpopulations">
+<span class="sig-name descname"><span class="pre">subpopulations</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.subpopulations" title="Link to this definition"></a></dt>
+<dd><p>the list of Subpopulation objects in the metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#metapypulation.metapopulation.SetOfSubpopulations" title="metapypulation.metapopulation.SetOfSubpopulations">SetOfSubpopulations</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.type_of_interaction">
+<span class="sig-name descname"><span class="pre">type_of_interaction</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.type_of_interaction" title="Link to this definition"></a></dt>
+<dd><p>The type of interaction to implement between individuals for cultural changes. Currently accepts only “axelrod_interaction”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.migration_matrix">
+<span class="sig-name descname"><span class="pre">migration_matrix</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.migration_matrix" title="Link to this definition"></a></dt>
+<dd><p>A matrix determining migration rates between subpopulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.carrying_capacities">
+<span class="sig-name descname"><span class="pre">carrying_capacities</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.carrying_capacities" title="Link to this definition"></a></dt>
+<dd><p>A list of carrying capacities (one for each subpopulation) or an integer (same carrying capacity for each subpopulation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int] | int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.number_of_features">
+<span class="sig-name descname"><span class="pre">number_of_features</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.number_of_features" title="Link to this definition"></a></dt>
+<dd><p>Total number of cultural features per individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.number_of_traits">
+<span class="sig-name descname"><span class="pre">number_of_traits</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.number_of_traits" title="Link to this definition"></a></dt>
+<dd><p>Number of different possible traits for each cultural feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.mutation_rate">
+<span class="sig-name descname"><span class="pre">mutation_rate</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.mutation_rate" title="Link to this definition"></a></dt>
+<dd><p>Probability of a mutation to occur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.min_trait">
+<span class="sig-name descname"><span class="pre">min_trait</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.min_trait" title="Link to this definition"></a></dt>
+<dd><p>Minimum value for a trait in each feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.max_trait">
+<span class="sig-name descname"><span class="pre">max_trait</span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.max_trait" title="Link to this definition"></a></dt>
+<dd><p>Maximum value for a trait in each feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.count_origin_id_spread">
+<span class="sig-name descname"><span class="pre">count_origin_id_spread</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.count_origin_id_spread" title="Link to this definition"></a></dt>
+<dd><p>Counts the spread of individuals from deme of origin by counting how many individuals from each deme are in each deme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NxN matrix where N is the number of subpopulations. Rows are local subpopulations, columns are the original deme id.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.get_metapopulation_size">
+<span class="sig-name descname"><span class="pre">get_metapopulation_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.get_metapopulation_size" title="Link to this definition"></a></dt>
+<dd><p>Calculates the full size of the metapopulation. In the absence of population reduction strategies, this is always
+equal to the sum of all the carrying capacities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the number of individuals in the whole metapopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.gini_diversity_per_subpopulation">
+<span class="sig-name descname"><span class="pre">gini_diversity_per_subpopulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.gini_diversity_per_subpopulation" title="Link to this definition"></a></dt>
+<dd><p>Calculates Gini diversity index in each subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list with the Gini diversity index per subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.make_interact">
+<span class="sig-name descname"><span class="pre">make_interact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.make_interact" title="Link to this definition"></a></dt>
+<dd><p>Make one interaction in each subpopulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.metapopulation_count_sets">
+<span class="sig-name descname"><span class="pre">metapopulation_count_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.metapopulation_count_sets" title="Link to this definition"></a></dt>
+<dd><p>Calculates number of unique sets of traits in the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>number of unique sets in the metapopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.metapopulation_gini_diversity">
+<span class="sig-name descname"><span class="pre">metapopulation_gini_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.metapopulation_gini_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculates Gini-Simpson diversity index over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gini-Simpson diversity index of the metapopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.metapopulation_shannon_diversity">
+<span class="sig-name descname"><span class="pre">metapopulation_shannon_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.metapopulation_shannon_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculates Shannon diversity trait over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shannon diversity index of the metapopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.metapopulation_simpson_diversity">
+<span class="sig-name descname"><span class="pre">metapopulation_simpson_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.metapopulation_simpson_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculates Simpson diversity index over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simpson diversity index of the metapopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.migrate">
+<span class="sig-name descname"><span class="pre">migrate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.migrate" title="Link to this definition"></a></dt>
+<dd><p>A function that causes the migration step for a subpopulation.
+When called, each subpopulation finds to what subpopulations it needs to send individuals (based on
+the migration matrix supplied), and it calls upon the <cite>subpopulation.receive_migrants()</cite> function of
+the destinations.</p>
+<p>After each subpopulation has received the migrants, the function <cite>subpopulation.incorporate_migrants_in_population()</cite>
+is called for each subpopulation. This merges the incoming migrants with the already existing population.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.populate">
+<span class="sig-name descname"><span class="pre">populate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.populate" title="Link to this definition"></a></dt>
+<dd><p>Populate all (empty) subpopulations within the Metapopulation class.</p>
+<p>The populate step can take either a list of carrying capacities, a different number per each subpopulation,
+or one single carrying capacity that will determine the same number of individuals for each subpopulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.shannon_diversity_per_subpopulation">
+<span class="sig-name descname"><span class="pre">shannon_diversity_per_subpopulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.shannon_diversity_per_subpopulation" title="Link to this definition"></a></dt>
+<dd><p>Calculates Shannon diversity index in each subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list with the Shannon diversity index per subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.simpson_diversity_per_subpopulation">
+<span class="sig-name descname"><span class="pre">simpson_diversity_per_subpopulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.simpson_diversity_per_subpopulation" title="Link to this definition"></a></dt>
+<dd><p>Calculates Simpson diversity index in each subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list with the Simpson diversity index per subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.traits_sets_per_subpopulation">
+<span class="sig-name descname"><span class="pre">traits_sets_per_subpopulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.traits_sets_per_subpopulation" title="Link to this definition"></a></dt>
+<dd><p>Calculates number of unique sets of traits per each subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list with the number of unique sets per subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.Metapopulation.whittaker_beta_diversity">
+<span class="sig-name descname"><span class="pre">whittaker_beta_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.metapopulation.Metapopulation.whittaker_beta_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculate beta diversity as described by Whittaker (1960).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whittaker beta diversity.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.SetOfSubpopulations">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.metapopulation.</span></span><span class="sig-name descname"><span class="pre">SetOfSubpopulations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_subpopulations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_of_interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.metapopulation.SetOfSubpopulations" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></p>
+<p>A class inheriting from Set to act as container of Subpopulation objects. Methods are standard for a Set.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.metapopulation.SubpopulationIterator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.metapopulation.</span></span><span class="sig-name descname"><span class="pre">SubpopulationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subpopulations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.metapopulation.SubpopulationIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An iterator object ot iterate over the SetOfSubpopulations class.</p>
+</dd></dl>
+
+</section>
+<section id="module-metapypulation.subpopulation">
+<span id="metapypulation-subpopulation-module"></span><h2>metapypulation.subpopulation module<a class="headerlink" href="#module-metapypulation.subpopulation" title="Link to this heading"></a></h2>
+<p>A module containing the subpopulation class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.IndividualsIterator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.subpopulation.</span></span><span class="sig-name descname"><span class="pre">IndividualsIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individuals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.subpopulation.IndividualsIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An iterator object ot iterate over the SetOfSubpopulations class.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.subpopulation.</span></span><span class="sig-name descname"><span class="pre">SetOfIndividuals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.subpopulation.Subpopulation" title="metapypulation.subpopulation.Subpopulation"><span class="pre">Subpopulation</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MutableSet</span></code></p>
+<p>A class inheriting from MutableSet to act as container of Individual objects. Methods are standard for a MutableSet.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals.add" title="Link to this definition"></a></dt>
+<dd><p>Adds an Individual to the SetOfIndividuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><em>Individual</em></a>) – Individual to add to the set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals.discard">
+<span class="sig-name descname"><span class="pre">discard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals.discard" title="Link to this definition"></a></dt>
+<dd><p>Eliminates an individual from the set (and from the population).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><em>Individual</em></a>) – Individual to be discarded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals.empty_set">
+<span class="sig-name descname"><span class="pre">empty_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals.empty_set" title="Link to this definition"></a></dt>
+<dd><p>Empty the Set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals.sample_and_remove">
+<span class="sig-name descname"><span class="pre">sample_and_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_individuals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals.sample_and_remove" title="Link to this definition"></a></dt>
+<dd><p>Sample an individual, remove it from the Set and return it in a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number_of_individuals</strong> (<em>int</em>) – Number of individuals to sample randomly.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of all the individuals that have been sampled from the population.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual">Individual</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.SetOfIndividuals.shuffle">
+<span class="sig-name descname"><span class="pre">shuffle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.SetOfIndividuals.shuffle" title="Link to this definition"></a></dt>
+<dd><p>Shuffle the Set.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.subpopulation.</span></span><span class="sig-name descname"><span class="pre">Subpopulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_of_interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for a subpopulation in the metapopulation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.id" title="Link to this definition"></a></dt>
+<dd><p>Unique id of the subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.population">
+<span class="sig-name descname"><span class="pre">population</span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.population" title="Link to this definition"></a></dt>
+<dd><p>Set containing all the individuals in the subpopulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#metapypulation.subpopulation.SetOfIndividuals" title="metapypulation.subpopulation.SetOfIndividuals">SetOfIndividuals</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.outgoing_migrants">
+<span class="sig-name descname"><span class="pre">outgoing_migrants</span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.outgoing_migrants" title="Link to this definition"></a></dt>
+<dd><p>Set containing individuals that are being prepared for emigration. Empty outside of the migration step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#metapypulation.subpopulation.SetOfIndividuals" title="metapypulation.subpopulation.SetOfIndividuals">SetOfIndividuals</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.incoming_migrants">
+<span class="sig-name descname"><span class="pre">incoming_migrants</span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.incoming_migrants" title="Link to this definition"></a></dt>
+<dd><p>Set containind individuals that were received through immigration. Empty outside of the migration step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#metapypulation.subpopulation.SetOfIndividuals" title="metapypulation.subpopulation.SetOfIndividuals">SetOfIndividuals</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.type_of_interaction">
+<span class="sig-name descname"><span class="pre">type_of_interaction</span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.type_of_interaction" title="Link to this definition"></a></dt>
+<dd><p>The type of interaction to implement between individuals for cultural changes. Currently accepts only “axelrod_interaction”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.add_individual">
+<span class="sig-name descname"><span class="pre">add_individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.add_individual" title="Link to this definition"></a></dt>
+<dd><p>Adds an individual to the subpopulation. This function does not remove the individual from somewhere else (in case of passages from list to list).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual"><em>Individual</em></a>) – individual to be added to the subpopulation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.count_deme_origin_id">
+<span class="sig-name descname"><span class="pre">count_deme_origin_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_number_of_subpopulations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.count_deme_origin_id" title="Link to this definition"></a></dt>
+<dd><p>Count how many individuals originally from each deme are found in this deme. It is generally invoked from Metapopulation to get a summary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>total_number_of_subpopulations</strong> – number of subpopulations in the whole metapopulation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list containing a count of individuals for each subpopulation present.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.count_traits_sets">
+<span class="sig-name descname"><span class="pre">count_traits_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.count_traits_sets" title="Link to this definition"></a></dt>
+<dd><p>This function counts the total of unique sets of traits in the subpopulation. For example,
+[0, 1, 2, 3, 4] is a set different from [1, 1, 2, 3, 4], which is different from [5, 4, 3, 2, 1], etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current number of different sets of traits in the subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.create_interaction">
+<span class="sig-name descname"><span class="pre">create_interaction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.create_interaction" title="Link to this definition"></a></dt>
+<dd><p>Samples two individuals at random in the subpopulation and makes them interact.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.get_current_number_of_migrants">
+<span class="sig-name descname"><span class="pre">get_current_number_of_migrants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.get_current_number_of_migrants" title="Link to this definition"></a></dt>
+<dd><p>Returns the current number of incoming immigrants during. Only returns a non-zero number during the migration step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current number of immigrants.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.get_population_size">
+<span class="sig-name descname"><span class="pre">get_population_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.get_population_size" title="Link to this definition"></a></dt>
+<dd><p>Returns the current subpopulation size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current subpopulation size.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.get_traits_sets">
+<span class="sig-name descname"><span class="pre">get_traits_sets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.get_traits_sets" title="Link to this definition"></a></dt>
+<dd><p>This function returns all the feature sets found in a subpopulation in an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All the current sets of features in the subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.gini_diversity">
+<span class="sig-name descname"><span class="pre">gini_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.gini_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Gini-Simpson diversity index of the subpopulation. This is equal to 1 - Simpson_index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Gini-Simpson diversity index of the subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.incorporate_migrants_in_population">
+<span class="sig-name descname"><span class="pre">incorporate_migrants_in_population</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.incorporate_migrants_in_population" title="Link to this definition"></a></dt>
+<dd><p>Merges incoming migrants into the local population.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.is_trait_in_subpopulation">
+<span class="sig-name descname"><span class="pre">is_trait_in_subpopulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.is_trait_in_subpopulation" title="Link to this definition"></a></dt>
+<dd><p>This function checks whether a given trait at a given feature is in the population.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trait</strong> (<em>int</em>) – the int referring to the trait that needs to be checked against</p></li>
+<li><p><strong>feature</strong> (<em>Optional</em><em>, </em><em>int</em>) – the feature that needs to be checked (index from 0 to N_features-1). If None, it checks for the trait in any feature. Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the trait is found in the subpopulation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.list_migrants">
+<span class="sig-name descname"><span class="pre">list_migrants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">migration_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.list_migrants" title="Link to this definition"></a></dt>
+<dd><p>Create a list of migrants that will be sent out of the subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>migration_rate</strong> (<em>float</em>) – The migration rate is defined as the expected percentage of population that will migrate at each generation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of individuals from the subpopulation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual">Individual</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.receive_migrants">
+<span class="sig-name descname"><span class="pre">receive_migrants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">giving_subpopulation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#metapypulation.subpopulation.Subpopulation" title="metapypulation.subpopulation.Subpopulation"><span class="pre">Subpopulation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">migration_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.receive_migrants" title="Link to this definition"></a></dt>
+<dd><p>Populate the list of incoming migrants with individuals coming from a giving_subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>giving_subpopulation</strong> (<a class="reference internal" href="#metapypulation.subpopulation.Subpopulation" title="metapypulation.subpopulation.Subpopulation"><em>Subpopulation</em></a>) – Subpopulation from which individuals are migrating.</p></li>
+<li><p><strong>migration_rate</strong> (<em>float</em>) – Percentage of the giving subpopulation that will migrate at each generation into the current subpopulation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of individuals from the giving subpopulation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#metapypulation.individual.Individual" title="metapypulation.individual.Individual">Individual</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.shannon_diversity">
+<span class="sig-name descname"><span class="pre">shannon_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.shannon_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Shannon diversity index in the subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current Shannon diversity index in the subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.subpopulation.Subpopulation.simpson_diversity">
+<span class="sig-name descname"><span class="pre">simpson_diversity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#metapypulation.subpopulation.Subpopulation.simpson_diversity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Simpson diversity index of the subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Simpson diversity index of the subpopulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-metapypulation.simulation">
+<span id="metapypulation-simulation-module"></span><h2>metapypulation.simulation module<a class="headerlink" href="#module-metapypulation.simulation" title="Link to this heading"></a></h2>
+<p>A module containing the tools to simulate a metapopulation and output the result in data tables.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metapypulation.simulation.</span></span><span class="sig-name descname"><span class="pre">Simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_subpopulations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migration_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carrying_capacities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replicates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">burn_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migration_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_timing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_timing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.simulation.Simulation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for the simulation of the metapopulation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.generations">
+<span class="sig-name descname"><span class="pre">generations</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.generations" title="Link to this definition"></a></dt>
+<dd><p>Number of generations to simulate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.burn_in">
+<span class="sig-name descname"><span class="pre">burn_in</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.burn_in" title="Link to this definition"></a></dt>
+<dd><p>Number of generations without migration in the beginning of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.number_of_subpopulations">
+<span class="sig-name descname"><span class="pre">number_of_subpopulations</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.number_of_subpopulations" title="Link to this definition"></a></dt>
+<dd><p>Number of subpopulations in the metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.interaction_type">
+<span class="sig-name descname"><span class="pre">interaction_type</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.interaction_type" title="Link to this definition"></a></dt>
+<dd><p>Type of interaction between individuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.carrying_capacities">
+<span class="sig-name descname"><span class="pre">carrying_capacities</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.carrying_capacities" title="Link to this definition"></a></dt>
+<dd><p>Initial population size of each subpopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int] | int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.replicates">
+<span class="sig-name descname"><span class="pre">replicates</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.replicates" title="Link to this definition"></a></dt>
+<dd><p>Number of replicates to simulate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.output_path">
+<span class="sig-name descname"><span class="pre">output_path</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.output_path" title="Link to this definition"></a></dt>
+<dd><p>Path of folder in which to save results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.measure_timing">
+<span class="sig-name descname"><span class="pre">measure_timing</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.measure_timing" title="Link to this definition"></a></dt>
+<dd><p>Number of generations between measurements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.verbose" title="Link to this definition"></a></dt>
+<dd><p>Whether to print text during the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.verbose_timing">
+<span class="sig-name descname"><span class="pre">verbose_timing</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.verbose_timing" title="Link to this definition"></a></dt>
+<dd><p>Number of generations between each print statement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.migration_matrix">
+<span class="sig-name descname"><span class="pre">migration_matrix</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.migration_matrix" title="Link to this definition"></a></dt>
+<dd><p>Type of migration topology (‘island’ or ‘stepping stone’), or matrix of migrations between demes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.mutation_rate">
+<span class="sig-name descname"><span class="pre">mutation_rate</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.mutation_rate" title="Link to this definition"></a></dt>
+<dd><p>Probability of a mutation to occur during copying.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.subpop_set_counts">
+<span class="sig-name descname"><span class="pre">subpop_set_counts</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.subpop_set_counts" title="Link to this definition"></a></dt>
+<dd><p>Collects the number of unique set counts per subpopulation averaged over subpopulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.subpop_shannon">
+<span class="sig-name descname"><span class="pre">subpop_shannon</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.subpop_shannon" title="Link to this definition"></a></dt>
+<dd><p>Collects the Shannon diversity index per subpopulation averaged over subpopulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.subpop_simpson">
+<span class="sig-name descname"><span class="pre">subpop_simpson</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.subpop_simpson" title="Link to this definition"></a></dt>
+<dd><p>Collects the Simpson diversity index per subpopulation averaged over subpopulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.subpop_gini">
+<span class="sig-name descname"><span class="pre">subpop_gini</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.subpop_gini" title="Link to this definition"></a></dt>
+<dd><p>Collects the Gini diversity index per subpopulation averaged over subpopulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.metapop_set_counts">
+<span class="sig-name descname"><span class="pre">metapop_set_counts</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.metapop_set_counts" title="Link to this definition"></a></dt>
+<dd><p>Collects the number of unique set counts over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.metapop_shannon">
+<span class="sig-name descname"><span class="pre">metapop_shannon</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.metapop_shannon" title="Link to this definition"></a></dt>
+<dd><p>Collects the Shannon diversity index over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.metapop_simpson">
+<span class="sig-name descname"><span class="pre">metapop_simpson</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.metapop_simpson" title="Link to this definition"></a></dt>
+<dd><p>Collects the Simpson diversity index over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.metapop_gini">
+<span class="sig-name descname"><span class="pre">metapop_gini</span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.metapop_gini" title="Link to this definition"></a></dt>
+<dd><p>Collects the Gini diversity index over the whole metapopulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.create_migration_table">
+<span class="sig-name descname"><span class="pre">create_migration_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_of_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migration_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.create_migration_table" title="Link to this definition"></a></dt>
+<dd><p>Create a migration table for the number of subpopulations in the case of Island or Stepping Stone model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<em>str</em>) – type of model. Either “island” or “stepping_stone”</p></li>
+<li><p><strong>migration_rate</strong> (<em>float</em>) – float between 0 and 1 representing the migration rate for the table.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.empty_lists">
+<span class="sig-name descname"><span class="pre">empty_lists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#metapypulation.simulation.Simulation.empty_lists" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.run_simulation">
+<span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.run_simulation" title="Link to this definition"></a></dt>
+<dd><p>Run all the replicates and print some outputs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.run_single_replicate">
+<span class="sig-name descname"><span class="pre">run_single_replicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replicate_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.run_single_replicate" title="Link to this definition"></a></dt>
+<dd><p>Run one replicate of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>replicate_id</strong> (<em>int</em>) – The number of the current replicate (for the output data columns).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metapypulation.simulation.Simulation.save_output">
+<span class="sig-name descname"><span class="pre">save_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#metapypulation.simulation.Simulation.save_output" title="Link to this definition"></a></dt>
+<dd><p>Save output to input folder.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-metapypulation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-metapypulation" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="metapypulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="author.html" class="btn btn-neutral float-right" title="About the author" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Matteo Tomasini.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
