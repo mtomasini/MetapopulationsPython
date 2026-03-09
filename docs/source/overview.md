@@ -63,3 +63,11 @@ G = 1 - \sum_{i = 1}^{K} p^2_i = 1 - S.
 \beta_W = \frac{K_m}{\bar{K}_s} - 1
 ```
 where {math}`K_m` is the number of sets of traits in the whole metapopulation, and {math}`\bar{K}_s` is the average number of sets of traits in each subpopulation.
+
+
+#### Fixation index ({math}`F_{ST}`)
+The fixation index is a measure of population differentiation in the presence of population structure. It is normally estimated using genetic data (in particular SNP). In our case we calculate it by counting pairwise differences in the features. To calculate the index, first one needs to calculate the average pairwise differences for any two individuals WITHIN ({math}`\pi_{\text{Within}}`) a subpopulation or BETWEEN two subpopulations ({math}`\pi_{\text{Between}}`). Then, we estimate the fixation index as
+
+```{math}
+\frac{\pi_{\text{betweenB}} - \pi_{\text{Within}}}{\pi_{\text{betweenB}}} .
+```

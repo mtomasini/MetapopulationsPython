@@ -4,7 +4,7 @@ as well as the migration rates between populations.
 """
 
 from collections.abc import Set, Iterator
-from itertools import permutations
+from itertools import pairwise, permutations
 import numpy as np
 import pandas as pd
 from typing import List
@@ -312,6 +312,49 @@ class Metapopulation():
         
         return np.array(counts)
 
+    
+    def fixation_index(self, subpop_id_1: int, subpop_id_2: int) -> float:
+        """
+        Calculate the fixation index (F_ST) between two subpopulations.
+
+        Args:
+            subpop_id_1 (int): id of the first subpopulation.
+            subpop_id_2 (int): id of the second subpopulation.
+
+        Returns:
+            fixation_index (float): value of the fixation index between the two populations.
+        """
+
+        pairwise_differences_between = []
+        pairwise_differences_within = []
+
+        individuals_subpop_1 = self.subpopulations[subpop_id_1].population
+        individuals_subpop_2 = self.subpopulations[subpop_id_2].population
+
+        # calculate pairwise differences within
+        iterator_1 = pairwise(range(self.subpopulations[subpop_id_1].get_population_size()))
+        iterator_2 = pairwise(range(self.subpopulations[subpop_id_2].get_population_size()))
+
+        for i, j in iterator_1:
+            number_of_differences = np.count_nonzero(individuals_subpop_1[i].features - individuals_subpop_1[j].features)
+            normalized_number_of_differences = number_of_differences/self.number_of_features
+            pairwise_differences_within.append(normalized_number_of_differences)
+        
+        for i, j in iterator_2:
+            number_of_differences = np.count_nonzero(individuals_subpop_2[i].features - individuals_subpop_2[j].features)
+            normalized_number_of_differences = number_of_differences/self.number_of_features
+            pairwise_differences_within.append(normalized_number_of_differences)
+
+        # calculate pairwise differences between
+        for individual_1 in individuals_subpop_1:
+            for individual_2 in individuals_subpop_2:
+                number_of_differences = np.count_nonzero(individual_1.features - individual_2.features) # at sites where individuals have same trait, result of subtraction is zero. Hence, count_nonzero of the subtraction is counting differences.
+                normalized_number_of_differences = number_of_differences/self.number_of_features
+                pairwise_differences_between.append(normalized_number_of_differences)
+
+        fixation_index = float((np.mean(pairwise_differences_between) - np.mean(pairwise_differences_within)) / np.mean(pairwise_differences_between))
+
+        return fixation_index
         
 class SubpopulationIterator(object):
     """
