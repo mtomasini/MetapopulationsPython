@@ -69,5 +69,5 @@ where {math}`K_m` is the number of sets of traits in the whole metapopulation, a
 The fixation index is a measure of population differentiation in the presence of population structure. It is normally estimated using genetic data (in particular SNP). In our case we calculate it by counting pairwise differences in the features. To calculate the index, first one needs to calculate the average pairwise differences for any two individuals WITHIN ({math}`\pi_{\text{Within}}`) a subpopulation or BETWEEN two subpopulations ({math}`\pi_{\text{Between}}`). Then, we estimate the fixation index as
 
 ```{math}
-\frac{\pi_{\text{betweenB}} - \pi_{\text{Within}}}{\pi_{\text{betweenB}}} .
+\frac{\pi_{\text{Between}} - \pi_{\text{Within}}}{\pi_{\text{Between}}} .
 ```
