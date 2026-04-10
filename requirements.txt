@@ -3,4 +3,4 @@ numpy==2.0.0
 pandas==2.2.2
 sphinx_rtd_theme
 distancia
-opencv
+opencv==4.13.0
