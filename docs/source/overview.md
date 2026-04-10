@@ -71,3 +71,14 @@ The fixation index is a measure of population differentiation in the presence of
 ```{math}
 \frac{\pi_{\text{Between}} - \pi_{\text{Within}}}{\pi_{\text{Between}}} .
 ```
+
+This estimate is normally too naif in "real life" as it is biased by for example very different population sizes, but it can be used in these idealized conditions, especially as the population sizes of sub-populations is quite regular. 
+
+
+#### Bray-Curtis dissimilarity
+The Bray-Curtis dissimilarity (Bray and Curtis, 1957) is a measure of how how dissimilar two subpopulations are in terms of their species richness. In the context of our model, we define a "species" as a specific set of features. What this implementation does, then, is to count how many individuals possess a certain set of features within a sub-population and compare this to a second subpopulation. In addition to the dissimilarity index between subpopulations, I implemented it between sets of population, which is useful for example to compare two groups of subpopulations as in the case of continental models. The index is implemented with the package `distancia` and is defined as:
+
+```{math}
+D_{\text{BC}} = \frac{\sum_{i=1}^{n}|x_i - y_i|}{\sum_{i=1}^{n}|x_i + y_i|}
+```
+where, for a species $i$, $x_i$ and $y_i$ are the number of individuals of that species found in subpopulations $X$ and $Y$.

@@ -71,6 +71,9 @@ def metapopulation_plot_comparison(dataset_1, dataset_2, title, legend_1, legend
     elif what_measure == 'beta':
         dataset_1_global = pd.read_csv(f"{dataset_1}_beta_diversity.csv", index_col=0)
         dataset_2_global = pd.read_csv(f"{dataset_2}_beta_diversity.csv", index_col=0)
+    elif what_measure == 'bray-curtis-0-4':
+        dataset_1_global = pd.read_csv(f"{dataset_1}_bray-curtis_0-4.csv", index_col=0)
+        dataset_2_global = pd.read_csv(f"{dataset_2}_bray-curtis_0-4.csv", index_col=0)
     else:
         raise ValueError("You need to decide what measure you will plot: 'set_counts', 'shannon', 'simpson' or 'gini'?")
     

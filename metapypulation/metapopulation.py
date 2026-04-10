@@ -4,6 +4,7 @@ as well as the migration rates between populations.
 """
 
 from collections.abc import Set, Iterator
+from distancia import BrayCurtis
 from itertools import pairwise, permutations
 import numpy as np
 import pandas as pd
@@ -355,6 +356,91 @@ class Metapopulation():
         fixation_index = float((np.mean(pairwise_differences_between) - np.mean(pairwise_differences_within)) / np.mean(pairwise_differences_between))
 
         return fixation_index
+
+
+    def bray_curtis_by_subpopulation_pair(self, subpop_id_1: int, subpop_id_2: int) -> int:
+        """
+        Calculate the Bray-Curtis index of dissimilarity between any two subpopulations. The index is 0 for completely equal subpopulations, 
+        and 1 for completely different ones.
+
+        Args:
+            subpop_id_1 (int): id of the first subpopulation.
+            subpop_id_2 (int): id of the second subpopulation.
+
+        Returns:
+            bray_curtis (int): Bray-Curtis dissimilarity between two subpopulations
+        """
+        individuals_subpop_1 = self.subpopulations[subpop_id_1].population
+        individuals_subpop_2 = self.subpopulations[subpop_id_2].population
+
+        number_of_features = self.number_of_features
+        traits_pop_1 = np.zeros((self.subpopulations[subpop_id_1].get_population_size(), number_of_features))
+        traits_pop_2 = np.zeros((self.subpopulations[subpop_id_2].get_population_size(), number_of_features))
+
+        i = 0
+        for individual in individuals_subpop_1:
+            traits_pop_1[i] = (individual.features)
+            i += 1
+        j = 0
+        for individual in individuals_subpop_2:
+            traits_pop_2[j] = (individual.features)
+            j += 1
+
+#        print(traits_pop_1)
+        traits_pop_1_sorted = np.sort(traits_pop_1)
+        traits_pop_2_sorted = np.sort(traits_pop_2)
+        unique_traits_pop_1, counts_pop_1 = np.unique(traits_pop_1_sorted, axis = 0, return_counts = True)
+        unique_traits_pop_2, counts_pop_2 = np.unique(traits_pop_2_sorted, axis = 0, return_counts = True)
+
+        # Create an instance of the BrayCurti class
+        bray_curtis_instance = BrayCurtis()
+
+        # Calculate the Bray-Curtis distance between the two samples
+        bray_curtis_distance = bray_curtis_instance.calculate(counts_pop_1, counts_pop_2)
+
+        return bray_curtis_distance
+
+    def bray_curtis_by_sets_of_subpopulations(self, group_of_subpop_id_1: List[int], group_of_subpop_id_2: List[int]) -> int:
+        """
+        Calculate the Bray-Curtis index of dissimilarity between any two sets of subpopulations. The index is 0 for completely equal subpopulations, 
+        and 1 for completely different ones.
+
+        Args:
+            group_of_subpop_id_1 (List[int]): list of ids of the first set of subpopulations.
+            group_of_subpop_id_2 (List[int]): list of ids of the second set of subpopulations.
+
+        Returns:
+            bray_curtis (int): Bray-Curtis dissimilarity between two sets of subpopulations
+        """
+
+        traits_pop_1 = []
+        traits_pop_2 = []
+        
+        for subpop_id in group_of_subpop_id_1:
+            individuals = self.subpopulations[subpop_id].population
+            for individual in individuals:
+                traits_pop_1.append(individual.features)
+        traits_pop_1 = np.array(traits_pop_1)
+        
+        for subpop_id in group_of_subpop_id_2:
+            individuals = self.subpopulations[subpop_id].population
+            for individual in individuals:
+                traits_pop_2.append(individual.features)
+        traits_pop_2 = np.array(traits_pop_2)
+
+        traits_pop_1_sorted = np.sort(traits_pop_1)
+        traits_pop_2_sorted = np.sort(traits_pop_2)
+        unique_traits_pop_1, counts_pop_1 = np.unique(traits_pop_1_sorted, axis = 0, return_counts = True)
+        unique_traits_pop_2, counts_pop_2 = np.unique(traits_pop_2_sorted, axis = 0, return_counts = True)
+
+        # Create an instance of the BrayCurti class
+        bray_curtis_instance = BrayCurtis()
+
+        # Calculate the Bray-Curtis distance between the two samples
+        bray_curtis_distance = bray_curtis_instance.calculate(counts_pop_1, counts_pop_2)
+
+        return bray_curtis_distance
+
         
 class SubpopulationIterator(object):
     """
