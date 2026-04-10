@@ -385,20 +385,38 @@ class Metapopulation():
         for individual in individuals_subpop_2:
             traits_pop_2[j] = (individual.features)
             j += 1
+        
+        # generate traits from features for easier comparison (vectorial comparison is a mess...)
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        traits_tokens_1 = []
+        traits_tokens_2 = []
+        for set_of_traits in traits_pop_1:
+            token = [alphabet[i] for i in set_of_traits.astype(int)]
+            token = "".join(token)    
+            traits_tokens_1.append(token)
 
-#        print(traits_pop_1)
-        traits_pop_1_sorted = np.sort(traits_pop_1)
-        traits_pop_2_sorted = np.sort(traits_pop_2)
-        unique_traits_pop_1, counts_pop_1 = np.unique(traits_pop_1_sorted, axis = 0, return_counts = True)
-        unique_traits_pop_2, counts_pop_2 = np.unique(traits_pop_2_sorted, axis = 0, return_counts = True)
+        for set_of_traits in traits_pop_2:
+            token = [alphabet[i] for i in set_of_traits.astype(int)]
+            token = "".join(token)    
+            traits_tokens_2.append(token)
+
+
+        unique_traits_pop_1, counts_pop_1 = np.unique(traits_tokens_1, axis = 0, return_counts = True)
+        unique_traits_pop_2, counts_pop_2 = np.unique(traits_tokens_2, axis = 0, return_counts = True)
+
+        table_traits_1 = pd.DataFrame({"trait_sets": unique_traits_pop_1, "counts_pop_1": counts_pop_1})
+        table_traits_2 = pd.DataFrame({"trait_sets": unique_traits_pop_2, "counts_pop_2": counts_pop_2})
+        table_traits = table_traits_1.merge(table_traits_2, how="outer", on="trait_sets")
+        table_traits.fillna(0, inplace=True)
 
         # Create an instance of the BrayCurti class
         bray_curtis_instance = BrayCurtis()
 
         # Calculate the Bray-Curtis distance between the two samples
-        bray_curtis_distance = bray_curtis_instance.calculate(counts_pop_1, counts_pop_2)
+        bray_curtis_distance = bray_curtis_instance.calculate(table_traits["counts_pop_1"], table_traits["counts_pop_2"])
 
         return bray_curtis_distance
+
 
     def bray_curtis_by_sets_of_subpopulations(self, group_of_subpop_id_1: List[int], group_of_subpop_id_2: List[int]) -> int:
         """
@@ -428,16 +446,33 @@ class Metapopulation():
                 traits_pop_2.append(individual.features)
         traits_pop_2 = np.array(traits_pop_2)
 
-        traits_pop_1_sorted = np.sort(traits_pop_1)
-        traits_pop_2_sorted = np.sort(traits_pop_2)
-        unique_traits_pop_1, counts_pop_1 = np.unique(traits_pop_1_sorted, axis = 0, return_counts = True)
-        unique_traits_pop_2, counts_pop_2 = np.unique(traits_pop_2_sorted, axis = 0, return_counts = True)
+        # generate traits from features for easier comparison (vectorial comparison is a mess...)
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        traits_tokens_1 = []
+        traits_tokens_2 = []
+        for set_of_traits in traits_pop_1:
+            token = [alphabet[i] for i in set_of_traits.astype(int)]
+            token = "".join(token)    
+            traits_tokens_1.append(token)
+
+        for set_of_traits in traits_pop_2:
+            token = [alphabet[i] for i in set_of_traits.astype(int)]
+            token = "".join(token)    
+            traits_tokens_2.append(token)
+
+        unique_traits_pop_1, counts_pop_1 = np.unique(traits_tokens_1, axis = 0, return_counts = True)
+        unique_traits_pop_2, counts_pop_2 = np.unique(traits_tokens_2, axis = 0, return_counts = True)
+
+        table_traits_1 = pd.DataFrame({"trait_sets": unique_traits_pop_1, "counts_pop_1": counts_pop_1})
+        table_traits_2 = pd.DataFrame({"trait_sets": unique_traits_pop_2, "counts_pop_2": counts_pop_2})
+        table_traits = table_traits_1.merge(table_traits_2, how="outer", on="trait_sets")
+        table_traits.fillna(0, inplace=True)
 
         # Create an instance of the BrayCurti class
         bray_curtis_instance = BrayCurtis()
 
         # Calculate the Bray-Curtis distance between the two samples
-        bray_curtis_distance = bray_curtis_instance.calculate(counts_pop_1, counts_pop_2)
+        bray_curtis_distance = bray_curtis_instance.calculate(table_traits["counts_pop_1"], table_traits["counts_pop_2"])
 
         return bray_curtis_distance
 
