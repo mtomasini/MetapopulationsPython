@@ -199,8 +199,11 @@ class Subpopulation():
         """
         traits = self.get_traits_sets()    
         uniques, counts = np.unique(traits, axis = 0, return_counts=True)
-        frequencies = counts / self.get_population_size()
-        simpson_diversity_index = np.sum(frequencies*frequencies)
+
+        total_population = self.get_population_size()
+        simpson_diversity_index = 1 - np.sum(counts*(counts-1))/(total_population*(total_population - 1))
+        # frequencies = counts / self.get_population_size()
+        # simpson_diversity_index = np.sum(frequencies*frequencies)
         
         return simpson_diversity_index
 
